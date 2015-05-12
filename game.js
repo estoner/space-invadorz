@@ -86,7 +86,10 @@
     update: function() {
       if (this.patrolX < 0 || this.patrolX > 30) {
         this.speedX = -this.speedX;
-        // TODO patrol downward at the end of every line
+        if (this.center.y < this.game.size.y - 35){
+          this.center.y += 8;
+        }
+        // TODO if invader reaches ground, player loses
       }
 
       if (Math.random() > 0.995 &&
