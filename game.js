@@ -2,6 +2,7 @@ var debug;
 ;(function() {
   var Game = function() {
     var screen = document.getElementById("screen").getContext('2d');
+    this.keyboarder = new Keyboarder();
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
     this.victory;
     this.bodies = createInvaders(this).concat(new Player(this));
@@ -43,9 +44,11 @@ var debug;
         this.victory = false;
       }
 
-      var players = this.bodies.filter(function(body){
-        return body instanceof Player;
-      })
+      if (typeof(this.victory) == "boolean") {
+        if (this.keyboarder.isDown(this.keyboarder.KEYS.R)) {
+          document.location.reload();
+        }
+      }
 
       // TODO if all invaders (or ship) are destroyed, display win/loss message and refresh game
     },
@@ -53,6 +56,7 @@ var debug;
     draw: function(screen) {
       screen.clearRect(0, 0, this.size.x, this.size.y);
       // TODO background gradient
+      // TODO dark background, light bodies
       for (var i = 0; i < this.bodies.length; i++) {
         if (this.bodies[i].draw !== undefined) {
           this.bodies[i].draw(screen);
@@ -60,13 +64,20 @@ var debug;
       }
 
       if (this.victory != undefined) {
+        var center = this.size.x / 2;
         screen.font = "48px serif";
         if (this.victory) {
           screen.fillStyle = "green";
-          screen.fillText("YUO WIN!!", 10, 50);
+          screen.textAlign = "center";
+          screen.fillText("YUO WIN!!", center, 50);
+          screen.font = "16px serif";
+          screen.fillText("Press R to restart", center, 100);
         } else if (!this.victory) {
           screen.fillStyle = "red";
-          screen.fillText("YUO LOSE!!", 10, 50);
+          screen.textAlign = "center";
+          screen.fillText("YUO LOSE!!", center, 50);
+          screen.font = "16px serif";
+          screen.fillText("Press R to restart", center, 100);
         }
       }
     },
@@ -280,7 +291,7 @@ var debug;
       return keyState[keyCode] === true;
     };
 
-    this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32 };
+    this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32, R: 82 };
   };
 
   var drawRect = function(screen, body) {
