@@ -1,8 +1,9 @@
+var debug;
 ;(function() {
   var Game = function() {
     var screen = document.getElementById("screen").getContext('2d');
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
-    console.log(this.size.x);
+    this.victory;
     this.bodies = createInvaders(this).concat(new Player(this));
 
     this.audioContext = new AudioContext();
@@ -29,6 +30,23 @@
         }
       }
 
+      var invaders = this.bodies.filter(function(body){
+        return body instanceof Invader;
+      })
+      var players = this.bodies.filter(function(body){
+        return body instanceof Player;
+      })
+
+      if (invaders.length == 0) {
+        this.victory = true;
+      } else if (players.length == 0) {
+        this.victory = false;
+      }
+
+      var players = this.bodies.filter(function(body){
+        return body instanceof Player;
+      })
+
       // TODO if all invaders (or ship) are destroyed, display win/loss message and refresh game
     },
 
@@ -38,6 +56,17 @@
       for (var i = 0; i < this.bodies.length; i++) {
         if (this.bodies[i].draw !== undefined) {
           this.bodies[i].draw(screen);
+        }
+      }
+
+      if (this.victory != undefined) {
+        screen.font = "48px serif";
+        if (this.victory) {
+          screen.fillStyle = "green";
+          screen.fillText("YUO WIN!!", 10, 50);
+        } else if (!this.victory) {
+          screen.fillStyle = "red";
+          screen.fillText("YUO LOSE!!", 10, 50);
         }
       }
     },
@@ -71,6 +100,14 @@
       if (bodyIndex !== -1) {
         this.bodies.splice(bodyIndex, 1);
       }
+    },
+
+    win: function() {
+      console.log("win");
+    },
+
+    lose: function() {
+      console.log("lose");
     }
   };
 
@@ -119,6 +156,11 @@
       );
       osc.start(context.currentTime);
       osc.stop(context.currentTime + duration);
+      // TODO pan audio based on player position
+      // var amp = context.createGain();
+      // amp.connect(panner)
+      // panner.setPosition(Math.sin(pannerCounter++/2)/2, 0,0);
+      // panner.connect(ac.destination);
     },
 
     collision: function() {
@@ -242,6 +284,7 @@
   };
 
   var drawRect = function(screen, body) {
+    screen.fillStyle = "black";
     screen.fillRect(body.center.x - body.size.x / 2,
                     body.center.y - body.size.y / 2,
                     body.size.x,
