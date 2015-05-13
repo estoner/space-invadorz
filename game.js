@@ -64,20 +64,27 @@
       if (this.victory != undefined) {
         var center = this.size.x / 2;
         screen.font = "48px Montserrat";
+        screen.shadowOffsetX = 1;
+        screen.shadowOffsetY = 1;
+        screen.shadowBlur = 10;
+        screen.shadowColor = "white";
         if (this.victory) {
           screen.fillStyle = "green";
           screen.textAlign = "center";
-          screen.fillText("YUO WIN!!", center, 50);
+          screen.fillText("YOU WIN", center, 50);
           screen.font = "16px Montserrat";
           screen.fillText("Press R to restart", center, 100);
         } else if (!this.victory) {
           screen.fillStyle = "red";
           screen.textAlign = "center";
-          screen.fillText("YUO LOSE!!", center, 50);
+          screen.fillText("YOU LOSE", center, 50);
           screen.font = "16px Montserrat";
           screen.fillText("Press R to restart", center, 100);
         }
       }
+      screen.shadowOffsetX = 0;
+      screen.shadowOffsetY = 0;
+      screen.shadowBlur = 0;
     },
 
     shootSound: function(context, duration) {
