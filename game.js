@@ -1,5 +1,8 @@
 ;(function() {
   var Game = function() {
+    // TODO state persists through wins
+    // TODO score
+    // TODO new weapons
     var screen = document.getElementById("screen").getContext('2d');
     this.keyboarder = new Keyboarder();
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
@@ -56,7 +59,6 @@
     draw: function(screen) {
       screen.clearRect(0, 0, this.size.x, this.size.y);
       var landscapeArea = this.size.y - 125
-      // TODO background gradient
       var gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea);
       gradient.addColorStop(0,"blue");
       gradient.addColorStop(1,"black");
@@ -252,6 +254,7 @@
     draw: function(screen) {
       drawRect(screen, this, "rebeccapurple");
       // TODO change to a shape
+      // TODO allow choosing male or female avatar
       // TODO change to an image
     },
 
