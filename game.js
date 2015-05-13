@@ -44,13 +44,13 @@ var debug;
         this.victory = false;
       }
 
+      // TODO pause key
       if (typeof(this.victory) == "boolean") {
         if (this.keyboarder.isDown(this.keyboarder.KEYS.R)) {
           document.location.reload();
         }
       }
 
-      // TODO if all invaders (or ship) are destroyed, display win/loss message and refresh game
     },
 
     draw: function(screen) {
@@ -136,8 +136,10 @@ var debug;
         this.speedX = -this.speedX;
         if (this.center.y < this.game.size.y - 35){
           this.center.y += 8;
+        } else {
+          this.game.victory = false;
         }
-        // TODO if invader reaches ground, player loses
+
       }
 
       if (Math.random() > 0.995 &&
