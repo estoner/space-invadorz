@@ -3,6 +3,7 @@
     var screen = document.getElementById("screen").getContext('2d');
     this.keyboarder = new Keyboarder();
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
+    this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 };
     this.victory;
     this.bodies = createInvaders(this).concat(new Player(this));
 
@@ -54,7 +55,13 @@
 
     draw: function(screen) {
       screen.clearRect(0, 0, this.size.x, this.size.y);
+      var landscapeArea = this.size.y - 125
       // TODO background gradient
+      var gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea);
+      gradient.addColorStop(0,"blue");
+      gradient.addColorStop(1,"black");
+      screen.fillStyle = gradient;
+      screen.fillRect(0,landscapeArea,this.size.x,this.size.y);
       for (var i = 0; i < this.bodies.length; i++) {
         if (this.bodies[i].draw !== undefined) {
           this.bodies[i].draw(screen);
@@ -66,8 +73,8 @@
         screen.font = "48px Montserrat";
         screen.shadowOffsetX = 1;
         screen.shadowOffsetY = 1;
-        screen.shadowBlur = 10;
-        screen.shadowColor = "white";
+        //screen.shadowBlur = 10;
+        screen.shadowColor = "grey";
         if (this.victory) {
           screen.fillStyle = "green";
           screen.textAlign = "center";
@@ -161,7 +168,7 @@
     },
 
     draw: function(screen) {
-      drawRect(screen, this, "grey");
+      drawRect(screen, this, "green");
     },
 
     shootSound: function(context, duration) {
