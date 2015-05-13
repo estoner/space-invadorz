@@ -1,4 +1,3 @@
-var debug;
 ;(function() {
   var Game = function() {
     var screen = document.getElementById("screen").getContext('2d');
@@ -56,7 +55,6 @@ var debug;
     draw: function(screen) {
       screen.clearRect(0, 0, this.size.x, this.size.y);
       // TODO background gradient
-      // TODO dark background, light bodies
       for (var i = 0; i < this.bodies.length; i++) {
         if (this.bodies[i].draw !== undefined) {
           this.bodies[i].draw(screen);
@@ -65,18 +63,18 @@ var debug;
 
       if (this.victory != undefined) {
         var center = this.size.x / 2;
-        screen.font = "48px serif";
+        screen.font = "48px Montserrat";
         if (this.victory) {
           screen.fillStyle = "green";
           screen.textAlign = "center";
           screen.fillText("YUO WIN!!", center, 50);
-          screen.font = "16px serif";
+          screen.font = "16px Montserrat";
           screen.fillText("Press R to restart", center, 100);
         } else if (!this.victory) {
           screen.fillStyle = "red";
           screen.textAlign = "center";
           screen.fillText("YUO LOSE!!", center, 50);
-          screen.font = "16px serif";
+          screen.font = "16px Montserrat";
           screen.fillText("Press R to restart", center, 100);
         }
       }
@@ -156,7 +154,7 @@ var debug;
     },
 
     draw: function(screen) {
-      drawRect(screen, this);
+      drawRect(screen, this, "grey");
     },
 
     shootSound: function(context, duration) {
@@ -238,7 +236,7 @@ var debug;
     },
 
     draw: function(screen) {
-      drawRect(screen, this);
+      drawRect(screen, this, "rebeccapurple");
       // TODO change to a shape
       // TODO change to an image
     },
@@ -271,7 +269,7 @@ var debug;
     },
 
     draw: function(screen) {
-      drawRect(screen, this);
+      drawRect(screen, this, "yellow");
     },
 
     collision: function() {
@@ -296,8 +294,8 @@ var debug;
     this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32, R: 82 };
   };
 
-  var drawRect = function(screen, body) {
-    screen.fillStyle = "black";
+  var drawRect = function(screen, body, color) {
+    screen.fillStyle = color;
     screen.fillRect(body.center.x - body.size.x / 2,
                     body.center.y - body.size.y / 2,
                     body.size.x,
