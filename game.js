@@ -3,12 +3,18 @@
     // TODO state persists through wins
     // TODO score
     // TODO new weapons
+    // TODO put civilians on the planet that can be killed by invader shots
+    // TODO scroll civilians horizontally like the planet is rotating
     var screen = document.getElementById("screen").getContext('2d');
     this.keyboarder = new Keyboarder();
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
     this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 };
+    this.playerHeight = 75;
     this.victory;
     this.bodies = createInvaders(this).concat(new Player(this));
+
+    this.numStars = 50;
+    this.stars = createStars(this, this.numStars);
 
     this.audioContext = new AudioContext();
 
@@ -56,19 +62,25 @@
 
     },
 
+    drawAll: function(array, screen) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].draw !== undefined) {
+          array[i].draw(screen);
+        }
+      }
+    },
+
     draw: function(screen) {
       screen.clearRect(0, 0, this.size.x, this.size.y);
-      var landscapeArea = this.size.y - 125
+      var landscapeArea = this.size.y - this.playerHeight;
       var gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea);
-      gradient.addColorStop(0,"blue");
+      gradient.addColorStop(0,"#0000AA");
       gradient.addColorStop(1,"black");
       screen.fillStyle = gradient;
       screen.fillRect(0,landscapeArea,this.size.x,this.size.y);
-      for (var i = 0; i < this.bodies.length; i++) {
-        if (this.bodies[i].draw !== undefined) {
-          this.bodies[i].draw(screen);
-        }
-      }
+
+      this.drawAll(this.stars, screen);
+      this.drawAll(this.bodies, screen);
 
       if (this.victory != undefined) {
         var center = this.size.x / 2;
@@ -101,7 +113,7 @@
       osc.connect(context.destination);
       osc.frequency.setValueAtTime(4000, context.currentTime);
       osc.frequency.linearRampToValueAtTime(
-        440, 
+        440,
         context.currentTime + duration
       );
       osc.start(context.currentTime);
@@ -148,7 +160,7 @@
     update: function() {
       if (this.patrolX < 0 || this.patrolX > 30) {
         this.speedX = -this.speedX;
-        if (this.center.y < this.game.size.y - 35){
+        if (this.center.y < this.game.size.y - this.game.playerHeight){
           this.center.y += 8;
         } else {
           this.game.victory = false;
@@ -210,7 +222,7 @@
   var Player = function(game) {
     this.game = game;
     this.size = { x: 15, y: 15 };
-    this.center = { x: this.game.size.x / 2, y: this.game.size.y - 35 };
+    this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight };
     this.keyboarder = new Keyboarder();
     this.lastShotFired = 0;
   };
@@ -349,6 +361,30 @@
         bodyPairs[i][1].collision(bodyPairs[i][0]);
       }
     }
+  };
+
+  var Star = function(game, center) {
+    this.game = game;
+    this.center = center;
+    this.size = { x: 2, y: 2 };
+  };
+
+  Star.prototype = {
+
+    draw: function(screen) {
+      drawRect(screen, this, "#dddddd");
+    },
+
+  };
+
+  var createStars = function(game, numStars) {
+    var stars = [];
+    for (var i = 0; i < numStars; i++) {
+      var x = Math.random() * game.size.x;
+      var y = Math.random() * (game.size.y - game.playerHeight);
+      stars.push(new Star(game, { x: x, y: y}));
+    }
+    return stars;
   };
 
   window.addEventListener('load', function() {
