@@ -36,6 +36,7 @@ li {
 */
 
 header {
+  text-align: center;
   background: rgba(0, 0, 0, 0.1);
   width: 100%;
   padding: 20px 0;
