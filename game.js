@@ -5,6 +5,8 @@
     // TODO new weapons
     // TODO put civilians on the planet that can be killed by invader shots
     // TODO scroll civilians horizontally like the planet is rotating
+    // TODO death sound FX
+    // TODO death explosion animations
     var screen = document.getElementById("screen").getContext('2d');
     this.keyboarder = new Keyboarder();
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
