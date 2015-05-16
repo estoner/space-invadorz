@@ -196,13 +196,14 @@
   };
 
   var createInvaders = function(game) {
+    var numInvaders = Math.round((game.size.x - 70)/10);
+    var numCols = Math.round(numInvaders/3);
     var invaders = [];
-    for (var i = 0; i < 24; i++) {
-      var x = 35 + (i % 8) * 30;
+    for (var i = 0; i < numInvaders; i++) {
+      var x = 35 + (i % numCols) * 30;
       var y = 35 + (i % 3) * 30;
       invaders.push(new Invader(game, { x: x, y: y}));
     }
-
     return invaders;
   };
 
