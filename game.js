@@ -18,7 +18,12 @@
     this.numStars = 50;
     this.stars = createStars(this, this.numStars);
 
-    this.audioContext = new AudioContext();
+    // frickin' Safari
+    if ('webkitAudioContext' in window) {
+      this.audioContext = new webkitAudioContext();
+    } else {
+      this.audioContext = new AudioContext();
+    }
 
     this.shootRate = 300;
 
@@ -223,10 +228,13 @@
 
   var Player = function(game) {
     this.game = game;
-    this.size = { x: 15, y: 15 };
+    this.size = { x: 21, y: 26 };
     this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight };
     this.keyboarder = new Keyboarder();
     this.lastShotFired = 0;
+    this.image = new Image(this.size.x, this.size.y);
+    this.image.src = "images/smallfreighterspr.png";
+    console.log(this.image.height);
   };
 
   Player.prototype = {
@@ -244,7 +252,7 @@
       if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
         if (Date.now() > this.lastShotFired + this.game.shootRate) {
           var bullet = new Bullet(this.game,
-                                  { x: this.center.x, y: this.center.y - this.size.y - 10 },
+                                  { x: this.center.x, y: this.center.y - 8 },
                                   { x: 0, y: -7 });
           this.game.addBody(bullet);
 
@@ -267,10 +275,12 @@
     },
 
     draw: function(screen) {
-      drawRect(screen, this, "rebeccapurple");
-      // TODO change to a shape
-      // TODO allow choosing male or female avatar
-      // TODO change to an image
+      //drawRect(screen, this, "rebeccapurple");
+      screen.drawImage(this.image,
+                       this.center.x - (this.size.x/2) ,
+                       this.center.y,
+                       this.size.x,
+                       this.size.y);
     },
 
     collision: function() {
