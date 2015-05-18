@@ -1,6 +1,8 @@
 ;(function() {
   var Game = function() {
     // TODO touchscreen controls for iOS
+    // TODO break JS into separate files
+    // TODO put TODOS in TODOS.md
     // TODO state persists through wins
     // TODO score
     // TODO new weapons
