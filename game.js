@@ -1,5 +1,6 @@
 ;(function() {
   var Game = function() {
+    // TODO touchscreen controls for iOS
     // TODO state persists through wins
     // TODO score
     // TODO new weapons
