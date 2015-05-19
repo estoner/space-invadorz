@@ -1,15 +1,4 @@
-;(function() {
   var Game = function() {
-    // TODO touchscreen controls for iOS
-    // TODO break JS into separate files
-    // TODO put TODOS in TODOS.md
-    // TODO state persists through wins
-    // TODO score
-    // TODO new weapons
-    // TODO put civilians on the planet that can be killed by invader shots
-    // TODO scroll civilians horizontally like the planet is rotating
-    // TODO death sound FX
-    // TODO death explosion animations
     var screen = document.getElementById("screen").getContext('2d');
     this.keyboarder = new Keyboarder();
     this.size = { x: screen.canvas.width, y: screen.canvas.height };
@@ -63,7 +52,6 @@
         this.victory = false;
       }
 
-      // TODO pause key
       if (typeof(this.victory) == "boolean") {
         if (this.keyboarder.isDown(this.keyboarder.KEYS.R)) {
           document.location.reload();
@@ -158,186 +146,6 @@
     }
   };
 
-  var Invader = function(game, center) {
-    this.game = game;
-    this.center = center;
-    this.size = { x: 15, y: 15 };
-    this.patrolX = 0;
-    this.speedX = 0.3;
-  };
-
-  Invader.prototype = {
-    update: function() {
-      if (this.patrolX < 0 || this.patrolX > 30) {
-        this.speedX = -this.speedX;
-        if (this.center.y < this.game.size.y - this.game.playerHeight){
-          this.center.y += 8;
-        } else {
-          this.game.victory = false;
-        }
-
-      }
-
-      if (Math.random() > 0.995 &&
-          !this.game.invadersBelow(this)) {
-        var bullet = new Bullet(this.game,
-                                { x: this.center.x, y: this.center.y + this.size.y / 2 },
-                                { x: Math.random() - 0.5, y: 2 });
-        this.game.addBody(bullet);
-        this.shootSound(this.game.audioContext, 0.1);
-      }
-
-      this.center.x += this.speedX;
-      this.patrolX += this.speedX;
-    },
-
-    draw: function(screen) {
-      drawRect(screen, this, "green");
-    },
-
-    shootSound: function(context, duration) {
-      var osc = context.createOscillator();
-      osc.connect(context.destination);
-      osc.frequency.setValueAtTime(2000, context.currentTime);
-      osc.frequency.linearRampToValueAtTime(
-        240,
-        context.currentTime + duration
-      );
-      osc.start(context.currentTime);
-      osc.stop(context.currentTime + duration);
-      // TODO pan audio based on player position
-      // var amp = context.createGain();
-      // amp.connect(panner)
-      // panner.setPosition(Math.sin(pannerCounter++/2)/2, 0,0);
-      // panner.connect(ac.destination);
-    },
-
-    collision: function() {
-      this.game.removeBody(this);
-    }
-  };
-
-  var createInvaders = function(game) {
-    var numInvaders = Math.round((game.size.x - 70)/10);
-    var numCols = Math.round(numInvaders/3);
-    var invaders = [];
-    for (var i = 0; i < numInvaders; i++) {
-      var x = 35 + (i % numCols) * 30;
-      var y = 35 + (i % 3) * 30;
-      invaders.push(new Invader(game, { x: x, y: y}));
-    }
-    return invaders;
-  };
-
-  var Player = function(game) {
-    this.game = game;
-    this.size = { x: 21, y: 26 };
-    this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight };
-    this.keyboarder = new Keyboarder();
-    this.lastShotFired = 0;
-    this.image = new Image(this.size.x, this.size.y);
-    this.image.src = "images/smallfreighterspr.png";
-    console.log(this.image.height);
-  };
-
-  Player.prototype = {
-    update: function() {
-      if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-        if (this.center.x > 2){
-          this.center.x -= 2;
-        }
-      } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-        if (this.center.x < this.game.size.x){
-          this.center.x += 2;
-        }
-      }
-
-      if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-        if (Date.now() > this.lastShotFired + this.game.shootRate) {
-          var bullet = new Bullet(this.game,
-                                  { x: this.center.x, y: this.center.y - 8 },
-                                  { x: 0, y: -7 });
-          this.game.addBody(bullet);
-
-          this.shootSound(this.game.audioContext, 0.2);
-          this.lastShotFired = Date.now();
-        }
-      }
-    },
-
-    shootSound: function(context, duration) {
-      var osc = context.createOscillator();
-      osc.connect(context.destination);
-      osc.frequency.setValueAtTime(900, context.currentTime);
-      osc.frequency.linearRampToValueAtTime(
-        440, 
-        context.currentTime + duration
-      );
-      osc.start(context.currentTime);
-      osc.stop(context.currentTime + duration);
-    },
-
-    draw: function(screen) {
-      //drawRect(screen, this, "rebeccapurple");
-      screen.drawImage(this.image,
-                       this.center.x - (this.size.x/2) ,
-                       this.center.y,
-                       this.size.x,
-                       this.size.y);
-    },
-
-    collision: function() {
-      this.game.removeBody(this);
-    }
-  };
-
-  var Bullet = function(game, center, velocity) {
-    this.game = game;
-    this.center = center;
-    this.size = { x: 3, y: 3 };
-    this.velocity = velocity;
-  };
-
-  Bullet.prototype = {
-    update: function() {
-      this.center.x += this.velocity.x;
-      this.center.y += this.velocity.y;
-
-      var screenRect = {
-        center: { x: this.game.size.x / 2, y: this.game.size.y / 2 },
-        size: this.game.size
-      };
-
-      if (!isColliding(this, screenRect)) {
-        this.game.removeBody(this);
-      }
-    },
-
-    draw: function(screen) {
-      drawRect(screen, this, "yellow");
-    },
-
-    collision: function() {
-      this.game.removeBody(this);
-    }
-  };
-
-  var Keyboarder = function() {
-    var keyState = {};
-    window.addEventListener('keydown', function(e) {
-      keyState[e.keyCode] = true;
-    });
-
-    window.addEventListener('keyup', function(e) {
-      keyState[e.keyCode] = false;
-    });
-
-    this.isDown = function(keyCode) {
-      return keyState[keyCode] === true;
-    };
-
-    this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32, R: 82 };
-  };
 
   var drawRect = function(screen, body, color) {
     screen.fillStyle = color;
@@ -378,31 +186,6 @@
     }
   };
 
-  var Star = function(game, center) {
-    this.game = game;
-    this.center = center;
-    this.size = { x: 2, y: 2 };
-  };
-
-  Star.prototype = {
-
-    draw: function(screen) {
-      drawRect(screen, this, "#dddddd");
-    },
-
-  };
-
-  var createStars = function(game, numStars) {
-    var stars = [];
-    for (var i = 0; i < numStars; i++) {
-      var x = Math.random() * game.size.x;
-      var y = Math.random() * (game.size.y - game.playerHeight);
-      stars.push(new Star(game, { x: x, y: y}));
-    }
-    return stars;
-  };
-
   window.addEventListener('load', function() {
     new Game();
   });
-})();
