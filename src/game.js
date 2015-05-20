@@ -43,9 +43,9 @@ export default class Game {
   update() {
     this.reportCollisions(this.bodies);
 
-    for (var i = 0; i < this.bodies.length; i++) {
-      if (this.bodies[i].update !== undefined) {
-        this.bodies[i].update();
+    for (var body of this.bodies) {
+      if (body.update !== undefined) {
+        body.update();
       }
     }
 
@@ -71,9 +71,9 @@ export default class Game {
   }
 
   drawAll(array, screen) {
-    for (var i = 0; i < array.length; i++) {
-      if (array[i].draw !== undefined) {
-        array[i].draw(screen);
+    for (var item of array) {
+      if (item.draw !== undefined) {
+        item.draw(screen);
       }
     }
   }
@@ -168,6 +168,7 @@ export default class Game {
 
   reportCollisions(bodies) {
     var bodyPairs = [];
+    // NEEDS SEMICOLONS FOR NOW
     for (var i = 0; i < bodies.length; i++) {
       for (var j = i + 1; j < bodies.length; j++) {
         if (this.isColliding(bodies[i], bodies[j])) {
@@ -176,13 +177,13 @@ export default class Game {
       }
     }
 
-    for (var i = 0; i < bodyPairs.length; i++) {
-      if (bodyPairs[i][0].collision !== undefined) {
-        bodyPairs[i][0].collision(bodyPairs[i][1]);
+    for (var pair of bodyPairs) {
+      if (pair[0].collision !== undefined) {
+        pair[0].collision(pair[1]);
       }
 
-      if (bodyPairs[i][1].collision !== undefined) {
-        bodyPairs[i][1].collision(bodyPairs[i][0]);
+      if (pair[1].collision !== undefined) {
+        pair[1].collision(pair[0]);
       }
     }
   }
@@ -191,6 +192,7 @@ export default class Game {
     var numInvaders = Math.round((game.size.x - 70)/10);
     var numCols = Math.round(numInvaders/3);
     var invaders = [];
+    // NEEDS SEMICOLONS FOR NOW
     for (var i = 0; i < numInvaders; i++) {
       var x = 35 + (i % numCols) * 30;
       var y = 35 + (i % 3) * 30;
