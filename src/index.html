@@ -1,12 +1,20 @@
 <html>
     <head>
-        <title>Space Invadorz</title>
+        <title>Test Page</title>
         <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <script src="space-invadorz.js"></script>
-        <script src="es6-module-loader.js"></script>
+        <script src="system.js"></script>
+        <script>
+          // System.bundles['space-invadorz'] = ['Bullet','Game','Invader','Keyboarder','Player','Star']
+          System.import('Game').then(function(m) {
+            debugger;
+            window.addEventListener('load', function() {
+              new Game();
+            });
+          });
+        </script>
     </head>
     <body style="background-color: black; color: white;">
-      <h1 style="font-family: 'Montserrat';">Space Invadorz</h1>
+      <!--<h1 style="font-family: 'Montserrat';">Space Invadorz</h1>-->
       <canvas id="screen" width="550" height="550">
         Your browser is too old to display it, but imagine a cheap
         Space Invaders knockoff in this space. Make "pew pew" sounds

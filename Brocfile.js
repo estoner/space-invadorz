@@ -10,20 +10,24 @@ const indexHtml = funnel(src, {
   files: ['index.html']
 });
 
-const loader = funnel(src, {
-  files: ['node_modules/es6-module-loader/dist/es6-module-loader.js']
+const loader = funnel('./node_modules/es6-module-loader/dist/', {
+  files: ['es6-module-loader.js','es6-module-loader.js.map']
+});
+
+const systemjs = funnel('./node_modules/systemjs/dist/', {
+  files: ['system.js','system.js.map']
 });
 
 const js = esTranspiler(src, {
   stage: 0,
   moduleIds: true,
-  modules: 'amd',
+  modules: 'system',
 
   // Transforms /index.js files to use their containing directory name
-  getModuleId: function (name) { 
-    name = pkg.name + '/' + name;
-    return name.replace(/\/index$/, '');
-  },
+  //getModuleId: function (name) {
+    //name = pkg.name + '/' + name;
+    //return name.replace(/\/index$/, '');
+  //},
 
   // Fix relative imports inside /index's
   resolveModuleSource: function (source, filename) {
@@ -41,6 +45,13 @@ const js = esTranspiler(src, {
   }
 });
 
+//const main = concat(js, {
+  //inputFiles: [
+    //'**/*.js'
+  //],
+  //outputFile: '/' + pkg.name + '.js'
+//});
+
 const main = concat(js, {
   inputFiles: [
     '**/*.js'
@@ -48,4 +59,4 @@ const main = concat(js, {
   outputFile: '/' + pkg.name + '.js'
 });
 
-module.exports = mergeTrees([main, indexHtml, loader]);
+module.exports = mergeTrees([js, indexHtml, loader, systemjs], {overwrite:true});
