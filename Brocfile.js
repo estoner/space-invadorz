@@ -18,10 +18,14 @@ const systemjs = funnel('./node_modules/systemjs/dist/', {
   files: ['system.js','system.js.map']
 });
 
+const requirejs = funnel('./node_modules/requirejs/', {
+  files: ['require.js']
+});
+
 const js = esTranspiler(src, {
   stage: 0,
   moduleIds: true,
-  modules: 'system',
+  modules: 'amd',
 
   // Transforms /index.js files to use their containing directory name
   //getModuleId: function (name) {
@@ -59,4 +63,4 @@ const main = concat(js, {
   outputFile: '/' + pkg.name + '.js'
 });
 
-module.exports = mergeTrees([js, indexHtml, loader, systemjs], {overwrite:true});
+module.exports = mergeTrees([js, indexHtml, requirejs], {overwrite:true});

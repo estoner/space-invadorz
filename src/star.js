@@ -1,5 +1,5 @@
 
-var Star = function(game, center) {
+export var Star = function(game, center) {
   this.game = game;
   this.center = center;
   this.size = { x: 2, y: 2 };

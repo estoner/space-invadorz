@@ -1,5 +1,5 @@
 
-var Bullet = function(game, center, velocity) {
+export var Bullet = function(game, center, velocity) {
   this.game = game;
   this.center = center;
   this.size = { x: 3, y: 3 };

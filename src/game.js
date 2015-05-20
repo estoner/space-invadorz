@@ -1,10 +1,10 @@
-import Bullet from "Bullet";
-import Keyboarder from "Keyboarder";
-import Invader from "Invader";
-import Player from "Player";
-import Star from "Star";
+import Bullet from "bullet";
+import Keyboarder from "keyboarder";
+import Invader from "invader";
+import Player from "player";
+import Star from "star";
 
-export default function() {
+export var Game = function() {
   var screen = document.getElementById("screen").getContext('2d');
   this.keyboarder = new Keyboarder();
   this.size = { x: screen.canvas.width, y: screen.canvas.height };
@@ -33,6 +33,11 @@ export default function() {
   };
 
   tick();
+
+  window.addEventListener('load', function() {
+    console.log("goddammit");
+    new Game();
+  });
 };
 
 Game.prototype = {
@@ -149,47 +154,47 @@ Game.prototype = {
 
   lose: function() {
     console.log("lose");
-  }
-};
+  },
 
+  drawRect: function(screen, body, color) {
+    screen.fillStyle = color;
+    screen.fillRect(body.center.x - body.size.x / 2,
+                    body.center.y - body.size.y / 2,
+                    body.size.x,
+                    body.size.y);
+  },
 
-var drawRect = function(screen, body, color) {
-  screen.fillStyle = color;
-  screen.fillRect(body.center.x - body.size.x / 2,
-                  body.center.y - body.size.y / 2,
-                  body.size.x,
-                  body.size.y);
-};
+  isColliding: function(b1, b2) {
+    return !(
+      b1 === b2 ||
+        b1.center.x + b1.size.x / 2 <= b2.center.x - b2.size.x / 2 ||
+        b1.center.y + b1.size.y / 2 <= b2.center.y - b2.size.y / 2 ||
+        b1.center.x - b1.size.x / 2 >= b2.center.x + b2.size.x / 2 ||
+        b1.center.y - b1.size.y / 2 >= b2.center.y + b2.size.y / 2
+    );
+  },
 
-var isColliding = function(b1, b2) {
-  return !(
-    b1 === b2 ||
-      b1.center.x + b1.size.x / 2 <= b2.center.x - b2.size.x / 2 ||
-      b1.center.y + b1.size.y / 2 <= b2.center.y - b2.size.y / 2 ||
-      b1.center.x - b1.size.x / 2 >= b2.center.x + b2.size.x / 2 ||
-      b1.center.y - b1.size.y / 2 >= b2.center.y + b2.size.y / 2
-  );
-};
+  reportCollisions: function(bodies) {
+    var bodyPairs = [];
+    for (var i = 0; i < bodies.length; i++) {
+      for (var j = i + 1; j < bodies.length; j++) {
+        if (isColliding(bodies[i], bodies[j])) {
+          bodyPairs.push([bodies[i], bodies[j]]);
+        }
+      }
+    }
 
-var reportCollisions = function(bodies) {
-  var bodyPairs = [];
-  for (var i = 0; i < bodies.length; i++) {
-    for (var j = i + 1; j < bodies.length; j++) {
-      if (isColliding(bodies[i], bodies[j])) {
-        bodyPairs.push([bodies[i], bodies[j]]);
+    for (var i = 0; i < bodyPairs.length; i++) {
+      if (bodyPairs[i][0].collision !== undefined) {
+        bodyPairs[i][0].collision(bodyPairs[i][1]);
+      }
+
+      if (bodyPairs[i][1].collision !== undefined) {
+        bodyPairs[i][1].collision(bodyPairs[i][0]);
       }
     }
   }
-
-  for (var i = 0; i < bodyPairs.length; i++) {
-    if (bodyPairs[i][0].collision !== undefined) {
-      bodyPairs[i][0].collision(bodyPairs[i][1]);
-    }
-
-    if (bodyPairs[i][1].collision !== undefined) {
-      bodyPairs[i][1].collision(bodyPairs[i][0]);
-    }
-  }
 };
 
-console.log("Fuuuuuuuuuuuuuuuuuuuu");
+
+

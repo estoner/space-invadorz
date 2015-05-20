@@ -1,5 +1,5 @@
 
-var Player = function(game) {
+export var Player = function(game) {
   this.game = game;
   this.size = { x: 21, y: 26 };
   this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight };

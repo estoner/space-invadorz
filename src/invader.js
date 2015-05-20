@@ -1,4 +1,4 @@
-var Invader = function(game, center) {
+export var Invader = function(game, center) {
   this.game = game;
   this.center = center;
   this.size = { x: 15, y: 15 };

@@ -2,15 +2,16 @@
     <head>
         <title>Test Page</title>
         <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <script src="system.js"></script>
+        <script data-main="game" src="require.js"></script>
         <script>
           // System.bundles['space-invadorz'] = ['Bullet','Game','Invader','Keyboarder','Player','Star']
-          System.import('Game').then(function(m) {
-            debugger;
-            window.addEventListener('load', function() {
-              new Game();
-            });
-          });
+          //System.import('Game').then(function(m) {
+            // new Game();
+            //window.addEventListener('load', function() {
+            //  console.log("goddammit");
+            //  new Game();
+            //});
+          //});
         </script>
     </head>
     <body style="background-color: black; color: white;">

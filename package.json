@@ -30,6 +30,7 @@
     "glob": "^5.0.3",
     "mocha": "^2.2.4",
     "mocha-jshint": "^1.0.0",
+    "requirejs": "^2.1.17",
     "systemjs": "^0.16.11"
   }
 }
