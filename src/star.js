@@ -11,11 +11,11 @@ export default class Star {
   }
 
   static createStars(game, numStars) {
-    var stars = []
+    let stars = []
     // NEEDS SEMICOLONS FOR NOW
-    for (var i = 0; i < numStars; i++) {
-      var x = Math.random() * game.size.x
-      var y = Math.random() * (game.size.y - game.playerHeight)
+    for (let i = 0; i < numStars; i++) {
+      let x = Math.random() * game.size.x
+      let y = Math.random() * (game.size.y - game.playerHeight)
       stars.push(new Star(game, { x: x, y: y}))
     }
     return stars

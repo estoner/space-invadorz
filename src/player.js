@@ -25,7 +25,7 @@ export default class Player {
 
     if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
       if (Date.now() > this.lastShotFired + this.game.shootRate) {
-        var bullet = new Bullet(this.game,
+        let bullet = new Bullet(this.game,
                                 { x: this.center.x, y: this.center.y - 8 },
                                 { x: 0, y: -7 })
         this.game.addBody(bullet)
@@ -37,7 +37,7 @@ export default class Player {
   }
 
   shootSound(context, duration) {
-    var osc = context.createOscillator()
+    let osc = context.createOscillator()
     osc.connect(context.destination)
     osc.frequency.setValueAtTime(900, context.currentTime)
     osc.frequency.linearRampToValueAtTime(

@@ -6,7 +6,7 @@ import Star from 'star'
 
 export default class Game {
   constructor() {
-    var screen = document.getElementById("screen").getContext('2d')
+    let screen = document.getElementById("screen").getContext('2d')
     this.keyboarder = new Keyboarder()
     this.size = { x: screen.canvas.width, y: screen.canvas.height }
     this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 }
@@ -26,8 +26,8 @@ export default class Game {
 
     this.shootRate = 300
 
-    var self = this
-    var tick = function() {
+    let self = this
+    let tick = function() {
       self.update()
       self.draw(screen)
       requestAnimationFrame(tick)
@@ -43,16 +43,16 @@ export default class Game {
   update() {
     this.reportCollisions(this.bodies)
 
-    for (var body of this.bodies) {
+    for (let body of this.bodies) {
       if (body.update !== undefined) {
         body.update()
       }
     }
 
-    var invaders = this.bodies.filter(function(body){
+    let invaders = this.bodies.filter(function(body){
       return body instanceof Invader
     })
-    var players = this.bodies.filter(function(body){
+    let players = this.bodies.filter(function(body){
       return body instanceof Player
     })
 
@@ -71,7 +71,7 @@ export default class Game {
   }
 
   drawAll(array, screen) {
-    for (var item of array) {
+    for (let item of array) {
       if (item.draw !== undefined) {
         item.draw(screen)
       }
@@ -80,8 +80,8 @@ export default class Game {
 
   draw(screen) {
     screen.clearRect(0, 0, this.size.x, this.size.y)
-    var landscapeArea = this.size.y - this.playerHeight
-    var gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea)
+    let landscapeArea = this.size.y - this.playerHeight
+    let gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea)
     gradient.addColorStop(0,"#0000AA")
     gradient.addColorStop(1,"black")
     screen.fillStyle = gradient
@@ -91,7 +91,7 @@ export default class Game {
     this.drawAll(this.bodies, screen)
 
     if (this.victory != undefined) {
-      var center = this.size.x / 2
+      let center = this.size.x / 2
       screen.font = "48px Montserrat"
       screen.shadowOffsetX = 1
       screen.shadowOffsetY = 1
@@ -117,7 +117,7 @@ export default class Game {
   }
 
   shootSound(context, duration) {
-    var osc = context.createOscillator()
+    let osc = context.createOscillator()
     osc.connect(context.destination)
     osc.frequency.setValueAtTime(4000, context.currentTime)
     osc.frequency.linearRampToValueAtTime(
@@ -141,7 +141,7 @@ export default class Game {
   }
 
   removeBody(body) {
-    var bodyIndex = this.bodies.indexOf(body)
+    let bodyIndex = this.bodies.indexOf(body)
     if (bodyIndex !== -1) {
       this.bodies.splice(bodyIndex, 1)
     }
@@ -167,17 +167,17 @@ export default class Game {
   }
 
   reportCollisions(bodies) {
-    var bodyPairs = []
+    let bodyPairs = []
     // NEEDS SEMICOLONS FOR NOW
-    for (var i = 0; i < bodies.length; i++) {
-      for (var j = i + 1; j < bodies.length; j++) {
+    for (let i = 0; i < bodies.length; i++) {
+      for (let j = i + 1; j < bodies.length; j++) {
         if (this.isColliding(bodies[i], bodies[j])) {
           bodyPairs.push([bodies[i], bodies[j]])
         }
       }
     }
 
-    for (var pair of bodyPairs) {
+    for (let pair of bodyPairs) {
       if (pair[0].collision !== undefined) {
         pair[0].collision(pair[1])
       }
@@ -189,13 +189,13 @@ export default class Game {
   }
 
   createInvaders(game) {
-    var numInvaders = Math.round((game.size.x - 70)/10)
-    var numCols = Math.round(numInvaders/3)
-    var invaders = []
+    let numInvaders = Math.round((game.size.x - 70)/10)
+    let numCols = Math.round(numInvaders/3)
+    let invaders = []
     // NEEDS SEMICOLONS FOR NOW
-    for (var i = 0; i < numInvaders; i++) {
-      var x = 35 + (i % numCols) * 30
-      var y = 35 + (i % 3) * 30
+    for (let i = 0; i < numInvaders; i++) {
+      let x = 35 + (i % numCols) * 30
+      let y = 35 + (i % 3) * 30
       invaders.push(new Invader(game, { x: x, y: y}))
     }
     return invaders

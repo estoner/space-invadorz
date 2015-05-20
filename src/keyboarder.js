@@ -1,5 +1,5 @@
 export default function Keyboarder() {
-  var keyState = {}
+  let keyState = {}
   window.addEventListener('keydown', function(e) {
     keyState[e.keyCode] = true
   })

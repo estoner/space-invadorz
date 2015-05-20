@@ -23,7 +23,7 @@ export default class Invader {
 
     if (Math.random() > 0.995 &&
         !this.game.invadersBelow(this)) {
-      var bullet = new Bullet(this.game,
+      let bullet = new Bullet(this.game,
                               { x: this.center.x, y: this.center.y + this.size.y / 2 },
                               { x: Math.random() - 0.5, y: 2 })
       this.game.addBody(bullet)
@@ -39,7 +39,7 @@ export default class Invader {
   }
 
   shootSound(context, duration) {
-    var osc = context.createOscillator()
+    let osc = context.createOscillator()
     osc.connect(context.destination)
     osc.frequency.setValueAtTime(2000, context.currentTime)
     osc.frequency.linearRampToValueAtTime(
@@ -49,7 +49,7 @@ export default class Invader {
     osc.start(context.currentTime)
     osc.stop(context.currentTime + duration)
     // TODO pan audio based on player position
-    // var amp = context.createGain()
+    // let amp = context.createGain()
     // amp.connect(panner)
     // panner.setPosition(Math.sin(pannerCounter++/2)/2, 0,0)
     // panner.connect(ac.destination)
