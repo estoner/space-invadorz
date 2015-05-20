@@ -192,3 +192,4 @@ var reportCollisions = function(bodies) {
   }
 };
 
+console.log("Fuuuuuuuuuuuuuuuuuuuu");
