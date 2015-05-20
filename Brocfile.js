@@ -2,13 +2,17 @@ const funnel = require('broccoli-funnel');
 const concat = require('broccoli-concat');
 const mergeTrees = require('broccoli-merge-trees');
 const esTranspiler = require('broccoli-babel-transpiler');
+const injectLiveReload = require('broccoli-inject-livereload');
+const tinylr = require('tiny-lr');
 const pkg = require('./package.json');
 
 const src = 'src';
 
-const indexHtml = funnel(src, {
+const plainIndexHtml = funnel(src, {
   files: ['index.html']
 });
+
+const indexHtml = injectLiveReload(plainIndexHtml);
 
 const imageDir = funnel('./images', {
   destDir: 'images'
@@ -25,6 +29,7 @@ const systemjs = funnel('./node_modules/systemjs/dist/', {
 const requirejs = funnel('./node_modules/requirejs/', {
   files: ['require.js']
 });
+
 
 const js = esTranspiler(src, {
   stage: 0,
@@ -60,4 +65,7 @@ const main = concat(js, {
   outputFile: '/' + pkg.name + '.js'
 });
 
+tinylr().listen(35729, function() {
+  console.log('... tiny-lr listening on port 35729 ...');
+})
 module.exports = mergeTrees([js, indexHtml, imageDir, requirejs], {overwrite:true});

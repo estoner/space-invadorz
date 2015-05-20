@@ -25,6 +25,7 @@
     "broccoli-babel-transpiler": "^5.0.0",
     "broccoli-concat": "^0.0.13",
     "broccoli-funnel": "^0.2.3",
+    "broccoli-inject-livereload": "^0.1.1",
     "broccoli-merge-trees": "^0.2.1",
     "chai": "^2.2.0",
     "es6-module-loader": "^0.16.6",
@@ -32,6 +33,7 @@
     "mocha": "^2.2.4",
     "mocha-jshint": "^1.0.0",
     "requirejs": "^2.1.17",
-    "systemjs": "^0.16.11"
+    "systemjs": "^0.16.11",
+    "tiny-lr": "^0.1.5"
   }
 }
