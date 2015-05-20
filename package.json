@@ -1,0 +1,37 @@
+{
+  "name": "space-invadorz",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "broccoli serve",
+    "build": "rm -rf dist && broccoli build dist",
+    "preinstall": "npm install -g broccoli-cli",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estoner/space-invadorz.git"
+  },
+  "author": "Evan Stoner <evan.stoner@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/estoner/space-invadorz/issues"
+  },
+  "homepage": "https://github.com/estoner/space-invadorz",
+  "devDependencies": {
+    "babel": "^5.0.0",
+    "broccoli": "^0.16.2",
+    "broccoli-babel-transpiler": "^5.0.0",
+    "broccoli-concat": "^0.0.13",
+    "broccoli-funnel": "^0.2.3",
+    "broccoli-merge-trees": "^0.2.1",
+    "chai": "^2.2.0",
+    "es6-module-loader": "^0.16.6",
+    "glob": "^5.0.3",
+    "mocha": "^2.2.4",
+    "mocha-jshint": "^1.0.0",
+    "requirejs": "^2.1.17",
+    "systemjs": "^0.16.11"
+  }
+}
