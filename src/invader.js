@@ -1,13 +1,16 @@
-export var Invader = function(game, center) {
-  this.game = game;
-  this.center = center;
-  this.size = { x: 15, y: 15 };
-  this.patrolX = 0;
-  this.speedX = 0.3;
-};
+import Draw from 'draw';
+import Bullet from 'bullet';
 
-Invader.prototype = {
-  update: function() {
+export default class Invader {
+  constructor(game, center) {
+    this.game = game;
+    this.center = center;
+    this.size = { x: 15, y: 15 };
+    this.patrolX = 0;
+    this.speedX = 0.3;
+  }
+
+  update() {
     if (this.patrolX < 0 || this.patrolX > 30) {
       this.speedX = -this.speedX;
       if (this.center.y < this.game.size.y - this.game.playerHeight){
@@ -29,13 +32,13 @@ Invader.prototype = {
 
     this.center.x += this.speedX;
     this.patrolX += this.speedX;
-  },
+  }
 
-  draw: function(screen) {
-    drawRect(screen, this, "green");
-  },
+  draw(screen) {
+    Draw.drawRect(screen, this, "green");
+  }
 
-  shootSound: function(context, duration) {
+  shootSound(context, duration) {
     var osc = context.createOscillator();
     osc.connect(context.destination);
     osc.frequency.setValueAtTime(2000, context.currentTime);
@@ -50,22 +53,12 @@ Invader.prototype = {
     // amp.connect(panner)
     // panner.setPosition(Math.sin(pannerCounter++/2)/2, 0,0);
     // panner.connect(ac.destination);
-  },
+  }
 
-  collision: function() {
+  collision() {
     this.game.removeBody(this);
   }
+
 };
 
-var createInvaders = function(game) {
-  var numInvaders = Math.round((game.size.x - 70)/10);
-  var numCols = Math.round(numInvaders/3);
-  var invaders = [];
-  for (var i = 0; i < numInvaders; i++) {
-    var x = 35 + (i % numCols) * 30;
-    var y = 35 + (i % 3) * 30;
-    invaders.push(new Invader(game, { x: x, y: y}));
-  }
-  return invaders;
-};
 

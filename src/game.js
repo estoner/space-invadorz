@@ -1,48 +1,47 @@
-import Bullet from "bullet";
-import Keyboarder from "keyboarder";
-import Invader from "invader";
-import Player from "player";
-import Star from "star";
+import Bullet from 'bullet';
+import Keyboarder from 'keyboarder';
+import Invader from 'invader';
+import Player from 'player';
+import Star from 'star';
 
-export var Game = function() {
-  var screen = document.getElementById("screen").getContext('2d');
-  this.keyboarder = new Keyboarder();
-  this.size = { x: screen.canvas.width, y: screen.canvas.height };
-  this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 };
-  this.playerHeight = 75;
-  this.victory;
-  this.bodies = createInvaders(this).concat(new Player(this));
+export default class Game {
+  constructor() {
+    var screen = document.getElementById("screen").getContext('2d');
+    this.keyboarder = new Keyboarder();
+    this.size = { x: screen.canvas.width, y: screen.canvas.height };
+    this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 };
+    this.playerHeight = 75;
+    this.victory;
+    this.bodies = this.createInvaders(this).concat(new Player(this));
 
-  this.numStars = 50;
-  this.stars = createStars(this, this.numStars);
+    this.numStars = 50;
+    this.stars = Star.createStars(this, this.numStars);
 
-  // frickin' Safari
-  if ('webkitAudioContext' in window) {
-    this.audioContext = new webkitAudioContext();
-  } else {
-    this.audioContext = new AudioContext();
+    // frickin' Safari
+    if ('webkitAudioContext' in window) {
+      this.audioContext = new webkitAudioContext();
+    } else {
+      this.audioContext = new AudioContext();
+    }
+
+    this.shootRate = 300;
+
+    var self = this;
+    var tick = function() {
+      self.update();
+      self.draw(screen);
+      requestAnimationFrame(tick);
+    };
+
+    tick();
+
+    window.addEventListener('load', function() {
+      new Game();
+    });
   }
 
-  this.shootRate = 300;
-
-  var self = this;
-  var tick = function() {
-    self.update();
-    self.draw(screen);
-    requestAnimationFrame(tick);
-  };
-
-  tick();
-
-  window.addEventListener('load', function() {
-    console.log("goddammit");
-    new Game();
-  });
-};
-
-Game.prototype = {
-  update: function() {
-    reportCollisions(this.bodies);
+  update() {
+    this.reportCollisions(this.bodies);
 
     for (var i = 0; i < this.bodies.length; i++) {
       if (this.bodies[i].update !== undefined) {
@@ -69,17 +68,17 @@ Game.prototype = {
       }
     }
 
-  },
+  }
 
-  drawAll: function(array, screen) {
+  drawAll(array, screen) {
     for (var i = 0; i < array.length; i++) {
       if (array[i].draw !== undefined) {
         array[i].draw(screen);
       }
     }
-  },
+  }
 
-  draw: function(screen) {
+  draw(screen) {
     screen.clearRect(0, 0, this.size.x, this.size.y);
     var landscapeArea = this.size.y - this.playerHeight;
     var gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea);
@@ -115,9 +114,9 @@ Game.prototype = {
     screen.shadowOffsetX = 0;
     screen.shadowOffsetY = 0;
     screen.shadowBlur = 0;
-  },
+  }
 
-  shootSound: function(context, duration) {
+  shootSound(context, duration) {
     var osc = context.createOscillator();
     osc.connect(context.destination);
     osc.frequency.setValueAtTime(4000, context.currentTime);
@@ -127,44 +126,37 @@ Game.prototype = {
     );
     osc.start(context.currentTime);
     osc.stop(context.currentTime + duration);
-  },
+  }
 
-  invadersBelow: function(invader) {
+  invadersBelow(invader) {
     return this.bodies.filter(function(b) {
       return b instanceof Invader &&
         Math.abs(invader.center.x - b.center.x) < b.size.x &&
         b.center.y > invader.center.y;
     }).length > 0;
-  },
+  }
 
-  addBody: function(body) {
+  addBody(body) {
     this.bodies.push(body);
-  },
+  }
 
-  removeBody: function(body) {
+  removeBody(body) {
     var bodyIndex = this.bodies.indexOf(body);
     if (bodyIndex !== -1) {
       this.bodies.splice(bodyIndex, 1);
     }
-  },
+  }
 
-  win: function() {
+  win() {
     console.log("win");
-  },
+  }
 
-  lose: function() {
+  lose() {
     console.log("lose");
-  },
+  }
 
-  drawRect: function(screen, body, color) {
-    screen.fillStyle = color;
-    screen.fillRect(body.center.x - body.size.x / 2,
-                    body.center.y - body.size.y / 2,
-                    body.size.x,
-                    body.size.y);
-  },
 
-  isColliding: function(b1, b2) {
+  isColliding(b1, b2) {
     return !(
       b1 === b2 ||
         b1.center.x + b1.size.x / 2 <= b2.center.x - b2.size.x / 2 ||
@@ -172,13 +164,13 @@ Game.prototype = {
         b1.center.x - b1.size.x / 2 >= b2.center.x + b2.size.x / 2 ||
         b1.center.y - b1.size.y / 2 >= b2.center.y + b2.size.y / 2
     );
-  },
+  }
 
-  reportCollisions: function(bodies) {
+  reportCollisions(bodies) {
     var bodyPairs = [];
     for (var i = 0; i < bodies.length; i++) {
       for (var j = i + 1; j < bodies.length; j++) {
-        if (isColliding(bodies[i], bodies[j])) {
+        if (this.isColliding(bodies[i], bodies[j])) {
           bodyPairs.push([bodies[i], bodies[j]]);
         }
       }
@@ -194,7 +186,21 @@ Game.prototype = {
       }
     }
   }
+
+  createInvaders(game) {
+    var numInvaders = Math.round((game.size.x - 70)/10);
+    var numCols = Math.round(numInvaders/3);
+    var invaders = [];
+    for (var i = 0; i < numInvaders; i++) {
+      var x = 35 + (i % numCols) * 30;
+      var y = 35 + (i % 3) * 30;
+      invaders.push(new Invader(game, { x: x, y: y}));
+    }
+    return invaders;
+  }
 };
 
 
-
+window.addEventListener('load', function() {
+  new Game();
+});

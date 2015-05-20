@@ -1,4 +1,4 @@
-export default function() {
+export default function Keyboarder() {
   var keyState = {};
   window.addEventListener('keydown', function(e) {
     keyState[e.keyCode] = true;

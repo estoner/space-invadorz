@@ -1,17 +1,18 @@
+import Keyboarder from 'keyboarder';
+import Bullet from 'bullet';
 
-export var Player = function(game) {
-  this.game = game;
-  this.size = { x: 21, y: 26 };
-  this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight };
-  this.keyboarder = new Keyboarder();
-  this.lastShotFired = 0;
-  this.image = new Image(this.size.x, this.size.y);
-  this.image.src = "images/smallfreighterspr.png";
-  console.log(this.image.height);
-};
+export default class Player {
+  constructor(game) {
+    this.game = game;
+    this.size = { x: 21, y: 26 };
+    this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight };
+    this.keyboarder = new Keyboarder();
+    this.lastShotFired = 0;
+    this.image = new Image(this.size.x, this.size.y);
+    this.image.src = "images/smallfreighterspr.png";
+  }
 
-Player.prototype = {
-  update: function() {
+  update() {
     if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
       if (this.center.x > 2){
         this.center.x -= 2;
@@ -33,9 +34,9 @@ Player.prototype = {
         this.lastShotFired = Date.now();
       }
     }
-  },
+  }
 
-  shootSound: function(context, duration) {
+  shootSound(context, duration) {
     var osc = context.createOscillator();
     osc.connect(context.destination);
     osc.frequency.setValueAtTime(900, context.currentTime);
@@ -45,18 +46,18 @@ Player.prototype = {
     );
     osc.start(context.currentTime);
     osc.stop(context.currentTime + duration);
-  },
+  }
 
-  draw: function(screen) {
+  draw(screen) {
     //drawRect(screen, this, "rebeccapurple");
     screen.drawImage(this.image,
                      this.center.x - (this.size.x/2) ,
                      this.center.y,
                      this.size.x,
                      this.size.y);
-  },
+  }
 
-  collision: function() {
+  collision() {
     this.game.removeBody(this);
   }
 };

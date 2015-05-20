@@ -1,13 +1,14 @@
+import Draw from 'draw';
 
-export var Bullet = function(game, center, velocity) {
-  this.game = game;
-  this.center = center;
-  this.size = { x: 3, y: 3 };
-  this.velocity = velocity;
-};
+export default class Bullet {
+  constructor(game, center, velocity) {
+    this.game = game;
+    this.center = center;
+    this.size = { x: 3, y: 3 };
+    this.velocity = velocity;
+  }
 
-Bullet.prototype = {
-  update: function() {
+  update() {
     this.center.x += this.velocity.x;
     this.center.y += this.velocity.y;
 
@@ -16,16 +17,16 @@ Bullet.prototype = {
       size: this.game.size
     };
 
-    if (!isColliding(this, screenRect)) {
+    if (!this.game.isColliding(this, screenRect)) {
       this.game.removeBody(this);
     }
-  },
+  }
 
-  draw: function(screen) {
-    drawRect(screen, this, "yellow");
-  },
+  draw(screen) {
+    Draw.drawRect(screen, this, "yellow");
+  }
 
-  collision: function() {
+  collision() {
     this.game.removeBody(this);
   }
 };

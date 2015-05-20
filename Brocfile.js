@@ -10,6 +10,10 @@ const indexHtml = funnel(src, {
   files: ['index.html']
 });
 
+const imageDir = funnel('./images', {
+  destDir: 'images'
+});
+
 const loader = funnel('./node_modules/es6-module-loader/dist/', {
   files: ['es6-module-loader.js','es6-module-loader.js.map']
 });
@@ -49,13 +53,6 @@ const js = esTranspiler(src, {
   }
 });
 
-//const main = concat(js, {
-  //inputFiles: [
-    //'**/*.js'
-  //],
-  //outputFile: '/' + pkg.name + '.js'
-//});
-
 const main = concat(js, {
   inputFiles: [
     '**/*.js'
@@ -63,4 +60,4 @@ const main = concat(js, {
   outputFile: '/' + pkg.name + '.js'
 });
 
-module.exports = mergeTrees([js, indexHtml, requirejs], {overwrite:true});
+module.exports = mergeTrees([js, indexHtml, imageDir, requirejs], {overwrite:true});

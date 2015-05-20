@@ -7,3 +7,10 @@ to learn web APIs I've never had a reason to try. Adapted from
 [excellent, excellent live-coding demo](https://vimeo.com/105955605).
 
 [Playable here](http://estoner.github.io/space-invadorz/).
+
+To run it yourself:
+```
+npm install
+npm start
+```
+And point your browser to [http://localhost:4200](http://localhost:4200).

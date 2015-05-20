@@ -6,6 +6,7 @@
   "scripts": {
     "start": "broccoli serve",
     "build": "rm -rf dist && broccoli build dist",
+    "preinstall": "npm install -g broccoli-cli",
     "test": "mocha"
   },
   "repository": {
