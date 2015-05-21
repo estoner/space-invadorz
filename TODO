@@ -1,7 +1,22 @@
 further ES6 cleanup and updates
   try System.js
   try bundle
-  checklist of ES6 features
+  checklist of ES6 features:
+    const
+    arrow functions
+    default parameter values?
+    property shorthand obj = {x,y} === {x:x, y:y}
+    foo (a, b) instead of foo: function (a, b) in objects (keyboarder)
+    destructuring arrays, objects
+    eliminate "prototype" in classes
+    extends (for bodies?)
+    get/set
+    generator functions
+    Set data structure
+    Array.find
+    String.startsWith endsWith includes
+
+live-reload
 touchscreen controls for iOS
 state persists through wins
 score

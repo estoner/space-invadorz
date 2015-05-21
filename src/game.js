@@ -35,9 +35,6 @@ export default class Game {
 
     tick()
 
-    window.addEventListener('load', function() {
-      new Game()
-    })
   }
 
   update() {
@@ -49,10 +46,10 @@ export default class Game {
       }
     }
 
-    let invaders = this.bodies.filter(function(body){
+    let invaders = this.bodies.filter(body => {
       return body instanceof Invader
     })
-    let players = this.bodies.filter(function(body){
+    let players = this.bodies.filter(body => {
       return body instanceof Player
     })
 
@@ -129,7 +126,7 @@ export default class Game {
   }
 
   invadersBelow(invader) {
-    return this.bodies.filter(function(b) {
+    return this.bodies.filter(b => {
       return b instanceof Invader &&
         Math.abs(invader.center.x - b.center.x) < b.size.x &&
         b.center.y > invader.center.y
@@ -203,6 +200,6 @@ export default class Game {
 }
 
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
   new Game()
 })
