@@ -3,18 +3,20 @@ further ES6 cleanup and updates
   try bundle
   checklist of ES6 features:
     const
-    arrow functions
     default parameter values?
-    property shorthand obj = {x,y} === {x:x, y:y}
+    NA property shorthand obj = {x,y} === {x:x, y:y}
     foo (a, b) instead of foo: function (a, b) in objects (keyboarder)
     destructuring arrays, objects
-    eliminate "prototype" in classes
     extends (for bodies?)
     get/set
     generator functions
     Set data structure
     Array.find
     String.startsWith endsWith includes
+  completed ES6 conversions:
+    let
+    arrow functions
+    class
 
 live-reload
 touchscreen controls for iOS

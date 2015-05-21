@@ -1,12 +1,18 @@
-export default function Keyboarder() {
-  let keyState = {}
-  window.addEventListener('keydown', e => { keyState[e.keyCode] = true })
-  window.addEventListener('keyup', e => { keyState[e.keyCode] = false })
-
-  this.isDown = function(keyCode) {
-    return keyState[keyCode] === true
+export default class Keyboarder {
+  constructor() {
+    this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32, R: 82 }
+    this.keyState = {}
+    window.addEventListener('keydown', e => {
+      this.keyState[e.keyCode] = true
+    })
+    window.addEventListener('keyup', e => {
+      this.keyState[e.keyCode] = false
+    })
   }
 
-  this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32, R: 82 }
+  isDown (keyCode) {
+    return this.keyState[keyCode] === true
+  }
+
 }
 

@@ -26,10 +26,9 @@ export default class Game {
 
     this.shootRate = 300
 
-    let self = this
-    let tick = function() {
-      self.update()
-      self.draw(screen)
+    let tick = () => {
+      this.update()
+      this.draw(screen)
       requestAnimationFrame(tick)
     }
 
