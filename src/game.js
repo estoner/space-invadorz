@@ -11,6 +11,7 @@ export default class Game {
     this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 }
     this.playerHeight = 75
     this.victory = undefined
+    this.shootRate = 300
     this.bodies = this.createInvaders(this).concat(new Player(this))
 
     this.numStars = 50
@@ -23,7 +24,6 @@ export default class Game {
       this.audioContext = new window.AudioContext()
     }
 
-    this.shootRate = 300
 
     let tick = () => {
       this.update()
@@ -188,7 +188,5 @@ export default class Game {
   }
 }
 
+new Game()
 
-window.addEventListener('load', () => {
-  new Game()
-})
