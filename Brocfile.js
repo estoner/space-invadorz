@@ -1,5 +1,6 @@
 const funnel = require('broccoli-funnel');
 const concat = require('broccoli-concat');
+const eslint = require('broccoli-lint-eslint');
 const mergeTrees = require('broccoli-merge-trees');
 const esTranspiler = require('broccoli-babel-transpiler');
 const pkg = require('./package.json');
@@ -26,7 +27,9 @@ const requirejs = funnel('./node_modules/requirejs/', {
   files: ['require.js']
 });
 
-const js = esTranspiler(src, {
+const lintedJs = eslint(src, {});
+
+const js = esTranspiler(lintedJs, {
   stage: 0,
   moduleIds: true,
   modules: 'amd',

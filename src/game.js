@@ -1,4 +1,3 @@
-import Bullet from 'bullet'
 import Keyboarder from 'keyboarder'
 import Invader from 'invader'
 import Player from 'player'
@@ -11,7 +10,7 @@ export default class Game {
     this.size = { x: screen.canvas.width, y: screen.canvas.height }
     this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 }
     this.playerHeight = 75
-    this.victory
+    this.victory = undefined
     this.bodies = this.createInvaders(this).concat(new Player(this))
 
     this.numStars = 50
@@ -19,9 +18,9 @@ export default class Game {
 
     // frickin' Safari
     if ('webkitAudioContext' in window) {
-      this.audioContext = new webkitAudioContext()
+      this.audioContext = new window.webkitAudioContext()
     } else {
-      this.audioContext = new AudioContext()
+      this.audioContext = new window.AudioContext()
     }
 
     this.shootRate = 300
@@ -52,13 +51,13 @@ export default class Game {
       return body instanceof Player
     })
 
-    if (invaders.length == 0) {
+    if (invaders.length === 0) {
       this.victory = true
-    } else if (players.length == 0) {
+    } else if (players.length === 0) {
       this.victory = false
     }
 
-    if (typeof(this.victory) == "boolean") {
+    if (typeof this.victory === "boolean") {
       if (this.keyboarder.isDown(this.keyboarder.KEYS.R)) {
         document.location.reload()
       }
@@ -78,15 +77,15 @@ export default class Game {
     screen.clearRect(0, 0, this.size.x, this.size.y)
     let landscapeArea = this.size.y - this.playerHeight
     let gradient = screen.createLinearGradient(this.center.x, this.size.y, this.center.x, landscapeArea)
-    gradient.addColorStop(0,"#0000AA")
-    gradient.addColorStop(1,"black")
+    gradient.addColorStop(0, "#0000AA")
+    gradient.addColorStop(1, "black")
     screen.fillStyle = gradient
-    screen.fillRect(0,landscapeArea,this.size.x,this.size.y)
+    screen.fillRect(0, landscapeArea, this.size.x, this.size.y)
 
     this.drawAll(this.stars, screen)
     this.drawAll(this.bodies, screen)
 
-    if (this.victory != undefined) {
+    if (this.victory !== undefined) {
       let center = this.size.x / 2
       screen.font = "48px Montserrat"
       screen.shadowOffsetX = 1
@@ -143,15 +142,6 @@ export default class Game {
     }
   }
 
-  win() {
-    console.log("win")
-  }
-
-  lose() {
-    console.log("lose")
-  }
-
-
   isColliding(b1, b2) {
     return !(
       b1 === b2 ||
@@ -185,8 +175,8 @@ export default class Game {
   }
 
   createInvaders(game) {
-    let numInvaders = Math.round((game.size.x - 70)/10)
-    let numCols = Math.round(numInvaders/3)
+    let numInvaders = Math.round( (game.size.x - 70) / 10)
+    let numCols = Math.round(numInvaders / 3)
     let invaders = []
     // NEEDS SEMICOLONS FOR NOW
     for (let i = 0; i < numInvaders; i++) {

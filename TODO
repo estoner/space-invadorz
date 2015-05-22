@@ -1,11 +1,9 @@
 further ES6 cleanup and updates
-  try System.js
   try bundle
   checklist of ES6 features:
     const
     default parameter values?
     NA property shorthand obj = {x,y} === {x:x, y:y}
-    foo (a, b) instead of foo: function (a, b) in objects (keyboarder)
     destructuring arrays, objects
     extends (for bodies?)
     get/set
@@ -13,10 +11,14 @@ further ES6 cleanup and updates
     Set data structure
     Array.find
     String.startsWith endsWith includes
-  completed ES6 conversions:
+  completed:
     let
     arrow functions
     class
+    foo (a, b) instead of foo: function (a, b) in objects
+  shelved for now:
+    try System.js
+  not applicable currently:
 
 live-reload
 touchscreen controls for iOS

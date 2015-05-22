@@ -41,7 +41,7 @@ export default class Player {
     osc.connect(context.destination)
     osc.frequency.setValueAtTime(900, context.currentTime)
     osc.frequency.linearRampToValueAtTime(
-      440, 
+      440,
       context.currentTime + duration
     )
     osc.start(context.currentTime)
@@ -51,7 +51,7 @@ export default class Player {
   draw(screen) {
     //drawRect(screen, this, "rebeccapurple")
     screen.drawImage(this.image,
-                     this.center.x - (this.size.x/2) ,
+                     this.center.x - (this.size.x / 2),
                      this.center.y,
                      this.size.x,
                      this.size.y)
