@@ -27,7 +27,7 @@ export default class Invader {
                               { x: this.center.x, y: this.center.y + this.size.y / 2 },
                               { x: Math.random() - 0.5, y: 2 })
       this.game.addBody(bullet)
-      this.shootSound(this.game.audioContext, 0.1)
+      this.game.shootSound(this.game.audioContext, 0.1, this.game.gainNode)
     }
 
     this.center.x += this.speedX
@@ -38,25 +38,9 @@ export default class Invader {
     Draw.drawRect(screen, this, "green")
   }
 
-  shootSound(context, duration) {
-    let osc = context.createOscillator()
-    osc.connect(context.destination)
-    osc.frequency.setValueAtTime(2000, context.currentTime)
-    osc.frequency.linearRampToValueAtTime(
-      240,
-      context.currentTime + duration
-    )
-    osc.start(context.currentTime)
-    osc.stop(context.currentTime + duration)
-    // TODO pan audio based on player position
-    // let amp = context.createGain()
-    // amp.connect(panner)
-    // panner.setPosition(Math.sin(pannerCounter++/2)/2, 0,0)
-    // panner.connect(ac.destination)
-  }
-
   collision() {
     this.game.removeBody(this)
+    this.game.incrementScore()
   }
 
 }

@@ -1,7 +1,7 @@
-import Keyboarder from 'keyboarder'
 import Invader from 'invader'
 import Player from 'player'
 import Star from 'star'
+import Keyboarder from 'keyboarder'
 
 export default class Game {
   constructor() {
@@ -11,6 +11,7 @@ export default class Game {
     this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 }
     this.playerHeight = 75
     this.victory = undefined
+    this.score = 0
     this.shootRate = 300
     this.bodies = this.createInvaders(this).concat(new Player(this))
 
@@ -23,6 +24,7 @@ export default class Game {
     } else {
       this.audioContext = new window.AudioContext()
     }
+    this.gainNode = this.audioContext.createGain()
 
 
     let tick = () => {
@@ -85,6 +87,8 @@ export default class Game {
     this.drawAll(this.stars, screen)
     this.drawAll(this.bodies, screen)
 
+    this.drawScore(this.score, screen)
+
     if (this.victory !== undefined) {
       let center = this.size.x / 2
       screen.font = "48px Montserrat"
@@ -111,9 +115,10 @@ export default class Game {
     screen.shadowBlur = 0
   }
 
-  shootSound(context, duration) {
+  shootSound(context, duration, gainNode) {
     let osc = context.createOscillator()
-    osc.connect(context.destination)
+    osc.connect(gainNode)
+    gainNode.connect(context.destination)
     osc.frequency.setValueAtTime(4000, context.currentTime)
     osc.frequency.linearRampToValueAtTime(
       440,
@@ -121,6 +126,16 @@ export default class Game {
     )
     osc.start(context.currentTime)
     osc.stop(context.currentTime + duration)
+
+    // TODO pan audio based on player position
+    // let amp = context.createGain()
+    // amp.connect(panner)
+    // panner.setPosition(Math.sin(pannerCounter++/2)/2, 0,0)
+    // panner.connect(ac.destination)
+  }
+
+  mute(gain) {
+    gain.value = 0
   }
 
   invadersBelow(invader) {
@@ -174,6 +189,10 @@ export default class Game {
     }
   }
 
+  incrementScore() {
+    this.score += 100
+  }
+
   createInvaders(game) {
     let numInvaders = Math.round( (game.size.x - 70) / 10)
     let numCols = Math.round(numInvaders / 3)
@@ -185,6 +204,13 @@ export default class Game {
       invaders.push(new Invader(game, { x: x, y: y}))
     }
     return invaders
+  }
+
+  drawScore(score, screen) {
+    screen.fillStyle = "green"
+    screen.textAlign = "right"
+    screen.font = "16px Montserrat"
+    screen.fillText(`Score: ${score} `, this.size.x - 10, 20)
   }
 }
 

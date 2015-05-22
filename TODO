@@ -1,33 +1,18 @@
 further ES6 cleanup and updates
   try bundle
-  checklist of ES6 features:
-    const
-    default parameter values?
-    NA property shorthand obj = {x,y} === {x:x, y:y}
-    destructuring arrays, objects
-    extends (for bodies?)
-    get/set
-    generator functions
-    Set data structure
-    Array.find
-    String.startsWith endsWith includes
-  completed:
-    let
-    arrow functions
-    class
-    foo (a, b) instead of foo: function (a, b) in objects
-  shelved for now:
-    try System.js
-  not applicable currently:
 
-live-reload
-touchscreen controls for iOS
 state persists through wins
-score
+touchscreen controls for iOS
 new weapons
+invader gfx
+pan audio based on player position
 put civilians on the planet that can be killed by invader shots
 scroll civilians horizontally like the planet is rotating
 death sound FX
 death explosion animations
-pause key
-pan audio based on player position
+
+Things That Have Eluded Me Thus Far
+  live-reload
+  mute toggle key (needs debounce)
+  pause key (needs debounce)
+  try System.js

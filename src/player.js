@@ -1,5 +1,6 @@
 import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
+import debounce from 'debounce'
 
 export default class Player {
   constructor(game) {
@@ -30,22 +31,14 @@ export default class Player {
                                 { x: 0, y: -7 })
         this.game.addBody(bullet)
 
-        this.shootSound(this.game.audioContext, 0.2)
+        this.game.shootSound(this.game.audioContext, 0.2, this.game.gainNode)
         this.lastShotFired = Date.now()
       }
     }
-  }
 
-  shootSound(context, duration) {
-    let osc = context.createOscillator()
-    osc.connect(context.destination)
-    osc.frequency.setValueAtTime(900, context.currentTime)
-    osc.frequency.linearRampToValueAtTime(
-      440,
-      context.currentTime + duration
-    )
-    osc.start(context.currentTime)
-    osc.stop(context.currentTime + duration)
+    if (this.keyboarder.isDown(this.keyboarder.KEYS.M)) {
+      this.game.mute(this.game.gainNode.gain)
+    }
   }
 
   draw(screen) {
