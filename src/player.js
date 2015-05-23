@@ -6,12 +6,14 @@ import Draw from 'draw'
 export default class Player {
   constructor(game) {
     this.game = game
-    this.size = { x: 21, y: 26 }
+    //this.size = { x: 21, y: 26 }
+    this.size = { x: 14, y: 34 }
     this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight }
     this.keyboarder = new Keyboarder()
     this.lastShotFired = 0
     this.image = new Image(this.size.x, this.size.y)
-    this.image.src = "images/smallfreighterspr.png"
+    //this.image.src = "images/smallfreighterspr.png"
+    this.image.src = "images/smallfighter0005x2.png"
   }
 
   update() {
@@ -29,7 +31,7 @@ export default class Player {
     if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
       if (Date.now() > this.lastShotFired + this.game.shootRate) {
         let bullet = new Bullet(this.game,
-                                { x: this.center.x, y: this.center.y - 8 },
+                                { x: this.center.x, y: this.center.y - 12 },
                                 { x: 0, y: -7 })
         this.game.addBody(bullet)
 

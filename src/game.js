@@ -5,10 +5,22 @@ import Keyboarder from 'keyboarder'
 
 export default class Game {
   constructor() {
-    let screen = document.getElementById("screen").getContext('2d')
+    const width = 550
+    const height = 550
+    const canvas = document.getElementById("screen")
+    const DPR = window.devicePixelRatio
+    const trueWidth = width * DPR
+    const trueHeight = height * DPR
+    canvas.width = trueWidth
+    canvas.height = trueHeight
+    canvas.style.width = width
+    canvas.style.height = height
+    let screen = canvas.getContext('2d')
+    screen.scale(2, 2)
+
     this.keyboarder = new Keyboarder()
-    this.size = { x: screen.canvas.width, y: screen.canvas.height }
-    this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 }
+    this.size = { x: width, y: height }
+    this.center = { x: width / 2, y: height / 2 }
     this.playerHeight = 75
     this.score = 0
     this.reset()
