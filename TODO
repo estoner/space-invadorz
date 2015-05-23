@@ -3,6 +3,7 @@ further ES6 cleanup and updates
 
 fix canvas and images to handle high-DPI screens
 make invader spacing/placement dynamic based on size
+improve invader friendly fire logic
 detect touchscreen
 touchscreen controls for iOS
 increase invader speed over time
