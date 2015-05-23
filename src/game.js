@@ -10,13 +10,8 @@ export default class Game {
     this.size = { x: screen.canvas.width, y: screen.canvas.height }
     this.center = { x: screen.canvas.width / 2, y: screen.canvas.height / 2 }
     this.playerHeight = 75
-    this.victory = undefined
     this.score = 0
-    this.shootRate = 300
-    this.bodies = this.createInvaders(this).concat(new Player(this))
-
-    this.numStars = 50
-    this.stars = Star.createStars(this, this.numStars)
+    this.reset()
 
     // frickin' Safari
     if ('webkitAudioContext' in window) {
@@ -35,6 +30,15 @@ export default class Game {
 
     tick()
 
+  }
+
+  reset() {
+    this.victory = undefined
+    this.shootRate = 300
+    this.bodies = this.createInvaders(this).concat(new Player(this))
+
+    this.numStars = 50
+    this.stars = Star.createStars(this, this.numStars)
   }
 
   update() {
@@ -61,7 +65,7 @@ export default class Game {
 
     if (typeof this.victory === "boolean") {
       if (this.keyboarder.isDown(this.keyboarder.KEYS.R)) {
-        document.location.reload()
+        this.reset()
       }
     }
 
