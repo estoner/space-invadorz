@@ -11,16 +11,17 @@ export default class Player {
     this.lastShotFired = 0
     this.image = new Image(this.size.x, this.size.y)
     this.image.src = "images/smallfreighterspr.png"
+    this.speed = 3
   }
 
   update() {
     if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-      if (this.center.x > 2){
-        this.center.x -= 2
+      if (this.center.x > this.speed){
+        this.center.x -= this.speed
       }
     } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
       if (this.center.x < this.game.size.x){
-        this.center.x += 2
+        this.center.x += this.speed
       }
     }
 

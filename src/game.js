@@ -122,6 +122,7 @@ export default class Game {
   shootSound(context, duration, gainNode) {
     let osc = context.createOscillator()
     osc.connect(gainNode)
+    gainNode.gain.value = 0.2
     gainNode.connect(context.destination)
     osc.frequency.setValueAtTime(4000, context.currentTime)
     osc.frequency.linearRampToValueAtTime(
