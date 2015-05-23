@@ -16,7 +16,7 @@ export default class Invader {
     if (this.patrolX < 0 || this.patrolX > 30) {
       this.speedX = -this.speedX
       if (this.center.y < this.game.size.y - this.game.playerHeight){
-        this.center.y += 8
+        this.center.y += 20
       } else {
         this.game.victory = false
       }
