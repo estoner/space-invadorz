@@ -1,6 +1,7 @@
 import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
-import debounce from 'debounce'
+import Draw from 'draw'
+//import debounce from 'debounce'
 
 export default class Player {
   constructor(game) {
@@ -11,17 +12,17 @@ export default class Player {
     this.lastShotFired = 0
     this.image = new Image(this.size.x, this.size.y)
     this.image.src = "images/smallfreighterspr.png"
-    this.speed = 3
   }
 
   update() {
+    const speed = 3
     if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-      if (this.center.x > this.speed){
-        this.center.x -= this.speed
+      if (this.center.x > speed){
+        this.center.x -= speed
       }
     } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
       if (this.center.x < this.game.size.x){
-        this.center.x += this.speed
+        this.center.x += speed
       }
     }
 
@@ -43,12 +44,7 @@ export default class Player {
   }
 
   draw(screen) {
-    //drawRect(screen, this, "rebeccapurple")
-    screen.drawImage(this.image,
-                     this.center.x - (this.size.x / 2),
-                     this.center.y,
-                     this.size.x,
-                     this.size.y)
+    Draw.drawImage(screen, this.image, this.center, this.size)
   }
 
   collision() {

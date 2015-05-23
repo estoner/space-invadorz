@@ -1,9 +1,9 @@
 further ES6 cleanup and updates
   try bundle
 
+make invader spacing/placement dynamic based on size
 touchscreen controls for iOS
 new weapons
-invader gfx
 help key for controls
 pan audio based on player position
 put high scores in localStorage

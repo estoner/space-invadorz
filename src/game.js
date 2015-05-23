@@ -205,7 +205,7 @@ export default class Game {
     // NEEDS SEMICOLONS FOR NOW
     for (let i = 0; i < numInvaders; i++) {
       let x = 35 + (i % numCols) * 30
-      let y = 35 + (i % 3) * 30
+      let y = 35 + (i % 3) * 60
       invaders.push(new Invader(game, { x: x, y: y}))
     }
     return invaders

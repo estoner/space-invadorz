@@ -6,4 +6,11 @@ export default class Draw {
                     body.size.x,
                     body.size.y)
   }
+  static drawImage(screen, image, center, size) {
+    screen.drawImage(image,
+                   center.x - (size.x / 2),
+                   center.y,
+                   size.x,
+                   size.y)
+  }
 }

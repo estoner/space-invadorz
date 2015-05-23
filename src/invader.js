@@ -5,9 +5,11 @@ export default class Invader {
   constructor(game, center) {
     this.game = game
     this.center = center
-    this.size = { x: 15, y: 15 }
+    this.size = { x: 19, y: 33 }
     this.patrolX = 0
     this.speedX = 0.3
+    this.image = new Image(this.size.x, this.size.y)
+    this.image.src = "images/alien4.png"
   }
 
   update() {
@@ -35,7 +37,8 @@ export default class Invader {
   }
 
   draw(screen) {
-    Draw.drawRect(screen, this, "green")
+    //Draw.drawRect(screen, this, "green")
+    Draw.drawImage(screen, this.image, this.center, this.size)
   }
 
   collision() {
