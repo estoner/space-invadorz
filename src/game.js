@@ -151,8 +151,9 @@ export default class Game {
     // panner.connect(ac.destination)
   }
 
-  mute(gain) {
-    gain.value = 0
+  mute() {
+    console.log('wtf')
+    this.gainNode.value = 0
   }
 
   invadersBelow(invader) {

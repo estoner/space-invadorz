@@ -1,7 +1,7 @@
 import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
 import Draw from 'draw'
-//import debounce from 'debounce'
+import debounce from 'lodash/function/debounce'
 
 export default class Player {
   constructor(game) {
@@ -41,7 +41,9 @@ export default class Player {
     }
 
     if (this.keyboarder.isDown(this.keyboarder.KEYS.M)) {
-      this.game.mute(this.game.gainNode.gain)
+      console.log('pressed m')
+      let muted = debounce(this.game.mute, 300)
+      muted()
     }
   }
 

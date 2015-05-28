@@ -27,6 +27,10 @@ const requirejs = funnel('./node_modules/requirejs/', {
   files: ['require.js']
 });
 
+const lodash = funnel('./node_modules/lodash-es', {
+  destDir: 'lodash'
+});
+
 const lintedJs = eslint(src, {});
 
 const js = esTranspiler(lintedJs, {
@@ -56,6 +60,12 @@ const js = esTranspiler(lintedJs, {
   }
 });
 
+const tpLodash = esTranspiler(lodash, {
+  stage: 0,
+  moduleIds: true,
+  modules: 'amd'
+});
+
 const main = concat(js, {
   inputFiles: [
     '**/*.js'
@@ -63,4 +73,4 @@ const main = concat(js, {
   outputFile: '/' + pkg.name + '.js'
 });
 
-module.exports = mergeTrees([js, indexHtml, imageDir, requirejs], {overwrite:true});
+module.exports = mergeTrees([js, indexHtml, imageDir, requirejs, tpLodash], {overwrite:true});
