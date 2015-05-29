@@ -42,8 +42,8 @@ export default class Player {
 
     if (this.keyboarder.isDown(this.keyboarder.KEYS.M)) {
       console.log('pressed m')
-      let muted = debounce(this.game.mute, 300)
-      muted()
+      let muted = debounce(this.game.mute, 1000)
+      muted(this.game.audioContext, this.game.gainNode)
     }
   }
 

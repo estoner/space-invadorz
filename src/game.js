@@ -32,6 +32,8 @@ export default class Game {
       this.audioContext = new window.AudioContext()
     }
     this.gainNode = this.audioContext.createGain()
+    this.gainNode.gain.value = 0.2
+    this.gainNode.connect(this.audioContext.destination)
 
 
     let tick = () => {
@@ -134,8 +136,6 @@ export default class Game {
   shootSound(context, duration, gainNode) {
     let osc = context.createOscillator()
     osc.connect(gainNode)
-    gainNode.gain.value = 0.2
-    gainNode.connect(context.destination)
     osc.frequency.setValueAtTime(4000, context.currentTime)
     osc.frequency.linearRampToValueAtTime(
       440,
@@ -151,9 +151,11 @@ export default class Game {
     // panner.connect(ac.destination)
   }
 
-  mute() {
+  mute(context, gain) {
     console.log('wtf')
-    this.gainNode.value = 0
+    console.log(gain)
+    gain.disconnect()
+    gain.connect(context.destination)
   }
 
   invadersBelow(invader) {
