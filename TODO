@@ -1,6 +1,9 @@
 further ES6 cleanup and updates
   try bundle
 
+just transpile used lodash modules to improve initial build time
+pause key (needs debounce)
+compose reusable functionality with _.extend()
 make invader spacing/placement dynamic based on size
 detect touchscreen
 touchscreen controls for iOS
@@ -17,6 +20,4 @@ death explosion animations
 
 Things That Have Eluded Me Thus Far
   live-reload
-  mute toggle key (needs debounce)
-  pause key (needs debounce)
   try System.js
