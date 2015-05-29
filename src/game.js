@@ -2,6 +2,7 @@ import Invader from 'invader'
 import Player from 'player'
 import Star from 'star'
 import Keyboarder from 'keyboarder'
+import debounce from 'lodash/function/debounce'
 
 export default class Game {
   constructor() {
@@ -24,6 +25,8 @@ export default class Game {
     this.playerHeight = 75
     this.score = 0
     this.reset()
+    this.mute = debounce(this.muteCore, 150)
+    this.pause = debounce(this.pauseCore, 150)
 
     // frickin' Safari
     if ('webkitAudioContext' in window) {
@@ -36,10 +39,14 @@ export default class Game {
     this.gainNode.connect(this.audioContext.destination)
     this.muted = false
 
+    this.paused = false
 
     let tick = () => {
-      this.update()
-      this.draw(screen)
+      if (!this.paused) {
+        this.update()
+        this.draw(screen)
+      }
+      this.acceptGlobalKeys()
       requestAnimationFrame(tick)
     }
 
@@ -57,6 +64,7 @@ export default class Game {
   }
 
   update() {
+
     this.reportCollisions(this.bodies)
 
     for (let body of this.bodies) {
@@ -83,7 +91,6 @@ export default class Game {
         this.reset()
       }
     }
-
   }
 
   drawAll(array, screen) {
@@ -152,7 +159,7 @@ export default class Game {
     // panner.connect(ac.destination)
   }
 
-  mute(context, gain) {
+  muteCore(context, gain) {
     if (this.muted) {
       gain.connect(context.destination)
       this.muted = false
@@ -161,6 +168,15 @@ export default class Game {
       this.muted = true
     }
   }
+
+  pauseCore() {
+    if (this.paused) {
+      this.paused = false
+    } else {
+      this.paused = true
+    }
+  }
+
 
   invadersBelow(invader) {
     return this.bodies.filter(b => {
@@ -235,6 +251,16 @@ export default class Game {
     screen.textAlign = "right"
     screen.font = "16px Montserrat"
     screen.fillText(`Score: ${score} `, this.size.x - 10, 20)
+  }
+
+  acceptGlobalKeys() {
+    if (this.keyboarder.isDown(this.keyboarder.KEYS.M)) {
+      this.mute(this.audioContext, this.gainNode)
+    }
+
+    if (this.keyboarder.isDown(this.keyboarder.KEYS.P)) {
+      this.pause()
+    }
   }
 }
 

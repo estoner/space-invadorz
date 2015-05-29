@@ -5,7 +5,8 @@ export default class Keyboarder {
       RIGHT: 39,
       SPACE: 32,
       R: 82,
-      M: 77
+      M: 77,
+      P: 80
     }
     this.keyState = {}
     window.addEventListener('keydown', e => {

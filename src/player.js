@@ -1,7 +1,6 @@
 import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
 import Draw from 'draw'
-import debounce from 'lodash/function/debounce'
 
 export default class Player {
   constructor(game) {
@@ -12,7 +11,6 @@ export default class Player {
     this.lastShotFired = 0
     this.image = new Image(this.size.x, this.size.y)
     this.image.src = "images/smallfighter0005x2.png"
-    this.mute = debounce(this.game.mute, 300)
   }
 
   update() {
@@ -39,9 +37,6 @@ export default class Player {
       }
     }
 
-    if (this.keyboarder.isDown(this.keyboarder.KEYS.M)) {
-      this.mute(this.game.audioContext, this.game.gainNode)
-    }
   }
 
   draw(screen) {
