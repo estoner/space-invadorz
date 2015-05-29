@@ -17,6 +17,7 @@ put civilians on the planet that can be killed by invader shots
 scroll civilians horizontally like the planet is rotating
 death sound FX
 death explosion animations
+try jspm.io, see http://developer.telerik.com/featured/choose-es6-modules-today
 
 Things That Have Eluded Me Thus Far
   live-reload
