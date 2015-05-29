@@ -6,14 +6,13 @@ import debounce from 'lodash/function/debounce'
 export default class Player {
   constructor(game) {
     this.game = game
-    //this.size = { x: 21, y: 26 }
     this.size = { x: 14, y: 34 }
     this.center = { x: this.game.size.x / 2, y: this.game.size.y - this.game.playerHeight }
     this.keyboarder = new Keyboarder()
     this.lastShotFired = 0
     this.image = new Image(this.size.x, this.size.y)
-    //this.image.src = "images/smallfreighterspr.png"
     this.image.src = "images/smallfighter0005x2.png"
+    this.mute = debounce(this.game.mute, 300)
   }
 
   update() {
@@ -41,9 +40,7 @@ export default class Player {
     }
 
     if (this.keyboarder.isDown(this.keyboarder.KEYS.M)) {
-      console.log('pressed m')
-      let muted = debounce(this.game.mute, 1000)
-      muted(this.game.audioContext, this.game.gainNode)
+      this.mute(this.game.audioContext, this.game.gainNode)
     }
   }
 

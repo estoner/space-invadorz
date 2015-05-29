@@ -34,6 +34,7 @@ export default class Game {
     this.gainNode = this.audioContext.createGain()
     this.gainNode.gain.value = 0.2
     this.gainNode.connect(this.audioContext.destination)
+    this.muted = false
 
 
     let tick = () => {
@@ -152,10 +153,13 @@ export default class Game {
   }
 
   mute(context, gain) {
-    console.log('wtf')
-    console.log(gain)
-    gain.disconnect()
-    gain.connect(context.destination)
+    if (this.muted) {
+      gain.connect(context.destination)
+      this.muted = false
+    } else {
+      gain.disconnect(context)
+      this.muted = true
+    }
   }
 
   invadersBelow(invader) {

@@ -1,7 +1,7 @@
 further ES6 cleanup and updates
   try bundle
 
-mute toggle key (needs debounce)
+just transpile used lodash modules to improve initial build time
 pause key (needs debounce)
 compose reusable functionality with _.extend()
 make invader spacing/placement dynamic based on size
