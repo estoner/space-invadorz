@@ -36,6 +36,21 @@ const lodash = funnel('./node_modules/lodash-es', {
           'lang/isNative.js',
           'string/escapeRegExp.js',
           'internal/isObjectLike.js',
+          'object/assign.js',
+          'internal/assignWith.js',
+          'internal/baseAssign.js',
+          'internal/createAssigner.js',
+          'object/keys.js',
+          'internal/baseCopy.js',
+          'internal/bindCallback.js',
+          'internal/isIterateeCall.js',
+          'function/restParam.js',
+          'internal/isArrayLike.js',
+          'internal/shimKeys.js', // start with this one
+          'utility/identity.js',
+          'internal/isObject.js',
+          'internal/getLength.js',
+          'internal/isLength.js',
           'internal/baseToString.js'
          ]
 });
