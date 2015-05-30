@@ -28,7 +28,16 @@ const requirejs = funnel('./node_modules/requirejs/', {
 });
 
 const lodash = funnel('./node_modules/lodash-es', {
-  destDir: 'lodash'
+  destDir: 'lodash',
+  files: ['function/debounce.js',
+          'lang/isObject.js',
+          'date/now.js',
+          'internal/getNative.js',
+          'lang/isNative.js',
+          'string/escapeRegExp.js',
+          'internal/isObjectLike.js',
+          'internal/baseToString.js'
+         ]
 });
 
 const lintedJs = eslint(src, {});

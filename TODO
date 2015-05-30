@@ -1,8 +1,6 @@
 further ES6 cleanup and updates
   try bundle
 
-just transpile used lodash modules to improve initial build time
-pause key (needs debounce)
 compose reusable functionality with _.extend()
 make invader spacing/placement dynamic based on size
 detect touchscreen
