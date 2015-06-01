@@ -25,8 +25,8 @@ export default class Game {
     this.playerHeight = 75
     this.score = 0
     this.reset()
-    this.mute = debounce(this.muteCore, 150)
-    this.pause = debounce(this.pauseCore, 150)
+    this.mute = debounce(this.muteCore, 500, true)
+    this.pause = debounce(this.pauseCore, 500, true)
 
     // frickin' Safari
     if ('webkitAudioContext' in window) {
@@ -209,7 +209,6 @@ export default class Game {
 
   reportCollisions(bodies) {
     let bodyPairs = []
-    // NEEDS SEMICOLONS FOR NOW
     for (let i = 0; i < bodies.length; i++) {
       for (let j = i + 1; j < bodies.length; j++) {
         if (this.isColliding(bodies[i], bodies[j])) {
@@ -237,7 +236,7 @@ export default class Game {
     let numInvaders = Math.round( (game.size.x - 70) / 10)
     let numCols = Math.round(numInvaders / 3)
     let invaders = []
-    // NEEDS SEMICOLONS FOR NOW
+
     for (let i = 0; i < numInvaders; i++) {
       let x = 35 + (i % numCols) * 30
       let y = 35 + (i % 3) * 60

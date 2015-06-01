@@ -12,7 +12,6 @@ export default class Star {
 
   static createStars(game, numStars) {
     let stars = []
-    // NEEDS SEMICOLONS FOR NOW
     for (let i = 0; i < numStars; i++) {
       let x = Math.random() * game.size.x
       let y = Math.random() * (game.size.y - game.playerHeight)
