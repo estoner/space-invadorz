@@ -1,6 +1,7 @@
 import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
 import Draw from 'draw'
+import throttle from 'lodash/function/throttle'
 
 export default class Player {
   constructor(game) {
@@ -11,6 +12,7 @@ export default class Player {
     this.lastShotFired = 0
     this.image = new Image(this.size.x, this.size.y)
     this.image.src = "images/smallfighter0005x2.png"
+    this.shoot = throttle(this.shootCore, 200, {trailing: false} )
   }
 
   update() {
@@ -26,17 +28,17 @@ export default class Player {
     }
 
     if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-      if (Date.now() > this.lastShotFired + this.game.shootRate) {
-        let bullet = new Bullet(this.game,
-                                { x: this.center.x, y: this.center.y - 12 },
-                                { x: 0, y: -7 })
-        this.game.addBody(bullet)
-
-        this.game.shootSound(this.game.audioContext, 0.2, this.game.gainNode)
-        this.lastShotFired = Date.now()
-      }
+      this.shoot()
     }
 
+  }
+
+  shootCore(){
+    let bullet = new Bullet(this.game,
+                            { x: this.center.x, y: this.center.y - 20 },
+                            { x: 0, y: -7 })
+    this.game.addBody(bullet)
+    this.game.shootSound(this.game.audioContext, 0.2, this.game.gainNode)
   }
 
   draw(screen) {

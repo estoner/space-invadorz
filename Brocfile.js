@@ -51,7 +51,8 @@ const lodash = funnel('./node_modules/lodash-es', {
           'internal/isObject.js',
           'internal/getLength.js',
           'internal/isLength.js',
-          'internal/baseToString.js'
+          'internal/baseToString.js',
+          'function/throttle.js'
          ]
 });
 

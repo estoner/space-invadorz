@@ -56,7 +56,6 @@ export default class Game {
 
   reset() {
     this.victory = undefined
-    this.shootRate = 300
     this.bodies = this.createInvaders(this).concat(new Player(this))
 
     this.numStars = 50

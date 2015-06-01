@@ -26,15 +26,19 @@ export default class Invader {
 
     if (Math.random() > 0.995 &&
         !this.game.invadersBelow(this)) {
-      let bullet = new Bullet(this.game,
-                              { x: this.center.x, y: this.center.y + this.size.y / 2 + this.patrolY},
-                              { x: (Math.random() / 2) - 0.2, y: 2 })
-      this.game.addBody(bullet)
-      this.game.shootSound(this.game.audioContext, 0.1, this.game.gainNode)
+      this.shoot()
     }
 
     this.center.x += this.speedX
     this.patrolX += this.speedX
+  }
+
+  shoot(){
+    let bullet = new Bullet(this.game,
+                            { x: this.center.x, y: this.center.y + this.size.y / 2 + this.patrolY},
+                            { x: (Math.random() / 2) - 0.2, y: 2 })
+    this.game.addBody(bullet)
+    this.game.shootSound(this.game.audioContext, 0.1, this.game.gainNode)
   }
 
   draw(screen) {

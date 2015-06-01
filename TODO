@@ -2,7 +2,6 @@ further ES6 cleanup and updates
   try bundle
 
 compose reusable functionality with _.extend()
-do LastShotFired with debounce() or throttle()
 make invader spacing/placement dynamic based on size
 detect touchscreen
 touchscreen controls for iOS
