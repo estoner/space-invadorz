@@ -1,5 +1,7 @@
 import Draw from 'draw'
 import Bullet from 'bullet'
+import withDrawImage from 'withDrawImage'
+import extend from 'lodash/object/extend'
 
 export default class Invader {
   constructor(game, center) {
@@ -11,6 +13,7 @@ export default class Invader {
     this.speedX = 0.3
     this.image = new Image(this.size.x, this.size.y)
     this.image.src = "images/alien4x2.png"
+    extend(this, withDrawImage)
   }
 
   update() {

@@ -33,30 +33,37 @@ const babelPolyfill = funnel('./node_modules/babel/node_modules/babel-core/', {
 
 const lodash = funnel('./node_modules/lodash-es', {
   destDir: 'lodash',
-  files: ['function/debounce.js',
-          'lang/isObject.js',
+  files: [
           'date/now.js',
-          'internal/getNative.js',
-          'lang/isNative.js',
-          'string/escapeRegExp.js',
-          'internal/isObjectLike.js',
-          'object/assign.js',
+          'function/debounce.js',
+          'function/restParam.js',
+          'function/throttle.js',
           'internal/assignWith.js',
           'internal/baseAssign.js',
           'internal/createAssigner.js',
-          'object/keys.js',
+          'internal/getNative.js',
+          'internal/isObjectLike.js',
           'internal/baseCopy.js',
           'internal/bindCallback.js',
           'internal/isIterateeCall.js',
-          'function/restParam.js',
           'internal/isArrayLike.js',
-          'internal/shimKeys.js', // start with this one
-          'utility/identity.js',
+          'internal/shimKeys.js',
           'internal/isObject.js',
           'internal/getLength.js',
           'internal/isLength.js',
+          'internal/baseProperty.js',
           'internal/baseToString.js',
-          'function/throttle.js'
+          'internal/isIndex.js',
+          'lang/isArguments.js',
+          'lang/isArray.js',
+          'lang/isNative.js',
+          'lang/isObject.js',
+          'object/assign.js',
+          'object/extend.js',
+          'object/keys.js',
+          'object/keysIn.js',
+          'string/escapeRegExp.js',
+          'utility/identity.js'
          ]
 });
 
