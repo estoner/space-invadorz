@@ -27,6 +27,10 @@ const requirejs = funnel('./node_modules/requirejs/', {
   files: ['require.js']
 });
 
+const babelPolyfill = funnel('./node_modules/babel/node_modules/babel-core/', {
+  files: ['browser-polyfill.min.js']
+});
+
 const lodash = funnel('./node_modules/lodash-es', {
   destDir: 'lodash',
   files: ['function/debounce.js',
@@ -98,4 +102,11 @@ const main = concat(js, {
   outputFile: '/' + pkg.name + '.js'
 });
 
-module.exports = mergeTrees([js, indexHtml, imageDir, requirejs, tpLodash], {overwrite:true});
+module.exports = mergeTrees([
+  js,
+  indexHtml,
+  imageDir,
+  requirejs,
+  babelPolyfill,
+  tpLodash
+], {overwrite:true});

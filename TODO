@@ -4,9 +4,11 @@ further ES6 cleanup and updates
 compose reusable functionality with _.extend()
 make invader spacing/placement dynamic based on size
 detect touchscreen
-fix safari
 touchscreen controls for iOS
+  use Hammer.js
   drag player back and forth and autoshoot
+vertical bounding box is weirdly sloppy, too tall
+  try sat.js?
 increase invader speed over time
 invaders should patrol all the way across if they have space
 new weapons
