@@ -1,7 +1,8 @@
 import Keyboarder from 'keyboarder'
 import withCollisionDestroys from 'withCollisionDestroys'
 import withDrawImage from 'withDrawImage'
-import withShoots from 'withShoots'
+import withBasicGun from 'withBasicGun'
+import withFatGun from 'withFatGun'
 import throttle from 'lodash/function/throttle'
 import extend from 'lodash/object/extend'
 
@@ -16,7 +17,8 @@ export default class Player {
     this.image.src = "images/smallfighter0005x2.png"
     extend(this, withDrawImage)
     extend(this, withCollisionDestroys)
-    extend(this, withShoots)
+    extend(this, withBasicGun)
+    //extend(this, withFatGun)
     this.shoot = throttle(this.shoot, 200, {trailing: false} )
   }
 
@@ -33,11 +35,7 @@ export default class Player {
     }
 
     if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-      this.shoot(
-                  { x: this.center.x, y: this.center.y - 20 },
-                  { x: 0, y: -7 },
-                  0.2
-      )
+      this.shoot()
     }
 
   }

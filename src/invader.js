@@ -1,6 +1,6 @@
 import withDrawImage from 'withDrawImage'
 import withCollisionDestroys from 'withCollisionDestroys'
-import withShoots from 'withShoots'
+import withInvaderWeapon from 'withInvaderWeapon'
 import extend from 'lodash/object/extend'
 
 export default class Invader {
@@ -15,7 +15,7 @@ export default class Invader {
     this.image.src = "images/alien4x2.png"
     extend(this, withDrawImage)
     extend(this, withCollisionDestroys)
-    extend(this, withShoots)
+    extend(this, withInvaderWeapon)
   }
 
   update() {
@@ -31,11 +31,7 @@ export default class Invader {
 
     if (Math.random() > 0.995 &&
         !this.game.invadersBelow(this)) {
-      this.shoot(
-        { x: this.center.x, y: this.center.y + this.size.y / 2 + this.patrolY},
-        { x: (Math.random() / 2) - 0.2, y: 2 },
-        0.1
-      )
+      this.shoot()
     }
 
     this.center.x += this.speedX
