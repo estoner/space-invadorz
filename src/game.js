@@ -36,7 +36,6 @@ export default class Game {
     }
     this.gainNode = this.audioContext.createGain()
     this.gainNode.gain.value = 0.2
-    this.gainNode.connect(this.audioContext.destination)
     this.muted = true
 
     this.paused = false

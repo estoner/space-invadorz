@@ -1,8 +1,6 @@
 further ES6 cleanup and updates
   try bundle
 
-compose reusable functionality with _.extend()
-make invader spacing/placement dynamic based on size
 detect touchscreen
 touchscreen controls for iOS
   use Hammer.js
@@ -20,8 +18,7 @@ scroll civilians horizontally like the planet is rotating
 death sound FX
 death explosion animations
 try jspm.io, see http://developer.telerik.com/featured/choose-es6-modules-today
-fix mute toggle (broke when doing debounce immediate?)
-  might just need leading true trailing false
+make invader spacing/placement dynamic based on size
 
 Things That Have Eluded Me Thus Far
   live-reload
