@@ -1,6 +1,6 @@
 import Bullet from 'bullet'
-var weapon = {
-  shoot: function(direction = 1) {
+let weapon = {
+  shoot(direction = 1) {
     let bullet = new Bullet(
       this.game,
       { x: this.center.x, y: this.center.y + this.size.y / 2 + this.patrolY},

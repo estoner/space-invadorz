@@ -3,6 +3,7 @@ import Player from 'player'
 import Star from 'star'
 import Keyboarder from 'keyboarder'
 import withBasicGun from 'withBasicGun'
+import withRemoteControlGun from 'withRemoteControlGun'
 import withFatGun from 'withFatGun'
 import withMultiGun from 'withMultiGun'
 import withSpreadGun from 'withSpreadGun'
@@ -59,11 +60,14 @@ export default class Game {
   }
 
   *advanceOrdnance() {
-    while (true) {
+    let i = 0
+    while (i < 1000000) {
       yield withBasicGun
       yield withFatGun
       yield withMultiGun
+      yield withRemoteControlGun
       yield withSpreadGun
+      i++
     }
   }
 

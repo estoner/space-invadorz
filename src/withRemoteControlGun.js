@@ -1,10 +1,12 @@
-import Bullet from 'bullet'
+import RemoteControlBullet from 'remoteControlBullet'
 let weapon = {
   shoot(direction = 1) {
-    let bullet = new Bullet(
+    let bullet = new RemoteControlBullet(
       this.game,
       { x: this.center.x, y: this.center.y - 20 },
-      { x: 0, y: -7 * direction }
+      { x: 0, y: -7 * direction },
+      3,
+      this
     )
     // this is a side effect
     this.game.addBody(bullet)

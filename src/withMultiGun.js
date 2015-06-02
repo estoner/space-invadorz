@@ -1,6 +1,6 @@
 import Bullet from 'bullet'
-var weapon = {
-  shoot: function(direction = 1) {
+let weapon = {
+  shoot(direction = 1) {
     for (let i = 1; i < 4; i++) {
       let j = (i * 8) - 16
       let bullet = new Bullet(
