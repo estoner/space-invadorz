@@ -5,6 +5,7 @@ import Keyboarder from 'keyboarder'
 import withBasicGun from 'withBasicGun'
 import withFatGun from 'withFatGun'
 import withMultiGun from 'withMultiGun'
+import withSpreadGun from 'withSpreadGun'
 import debounce from 'lodash/function/debounce'
 
 export default class Game {
@@ -62,6 +63,7 @@ export default class Game {
       yield withBasicGun
       yield withFatGun
       yield withMultiGun
+      yield withSpreadGun
     }
   }
 
