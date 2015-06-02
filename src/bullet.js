@@ -1,4 +1,6 @@
-import Draw from 'draw'
+import withDrawRect from 'withDrawRect'
+import withCollisionDestroys from 'withCollisionDestroys'
+import extend from 'lodash/object/extend'
 
 export default class Bullet {
   constructor(game, center, velocity) {
@@ -6,6 +8,9 @@ export default class Bullet {
     this.center = center
     this.size = { x: 3, y: 3 }
     this.velocity = velocity
+    this.color = "yellow"
+    extend(this, withDrawRect)
+    extend(this, withCollisionDestroys)
   }
 
   update() {
@@ -20,14 +25,6 @@ export default class Bullet {
     if (!this.game.isColliding(this, screenRect)) {
       this.game.removeBody(this)
     }
-  }
-
-  draw(screen) {
-    Draw.drawRect(screen, this, "yellow")
-  }
-
-  collision() {
-    this.game.removeBody(this)
   }
 }
 

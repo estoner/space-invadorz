@@ -1,5 +1,6 @@
 import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
+import withCollisionDestroys from 'withCollisionDestroys'
 import withDrawImage from 'withDrawImage'
 import throttle from 'lodash/function/throttle'
 import extend from 'lodash/object/extend'
@@ -15,6 +16,7 @@ export default class Player {
     this.image.src = "images/smallfighter0005x2.png"
     this.shoot = throttle(this.shootCore, 200, {trailing: false} )
     extend(this, withDrawImage)
+    extend(this, withCollisionDestroys)
   }
 
   update() {
@@ -43,8 +45,5 @@ export default class Player {
     this.game.shootSound(this.game.audioContext, 0.2, this.game.gainNode)
   }
 
-  collision() {
-    this.game.removeBody(this)
-  }
 }
 

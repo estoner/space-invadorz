@@ -1,13 +1,13 @@
-import Draw from 'draw'
+import withDrawRect from 'withDrawRect'
+import extend from 'lodash/object/extend'
+
 export default class Star {
   constructor(game, center) {
     this.game = game
     this.center = center
     this.size = { x: 2, y: 2 }
-  }
-
-  draw(screen) {
-    Draw.drawRect(screen, this, "#dddddd")
+    this.color = "#dddddd"
+    extend(this, withDrawRect)
   }
 
   static createStars(game, numStars) {

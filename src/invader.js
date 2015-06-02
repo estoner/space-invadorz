@@ -1,6 +1,7 @@
 import Draw from 'draw'
 import Bullet from 'bullet'
 import withDrawImage from 'withDrawImage'
+import withCollisionDestroys from 'withCollisionDestroys'
 import extend from 'lodash/object/extend'
 
 export default class Invader {
@@ -14,6 +15,7 @@ export default class Invader {
     this.image = new Image(this.size.x, this.size.y)
     this.image.src = "images/alien4x2.png"
     extend(this, withDrawImage)
+    extend(this, withCollisionDestroys)
   }
 
   update() {
@@ -46,11 +48,6 @@ export default class Invader {
 
   draw(screen) {
     Draw.drawImage(screen, this.image, this.center, this.size)
-  }
-
-  collision() {
-    this.game.removeBody(this)
-    this.game.incrementScore()
   }
 
 }
