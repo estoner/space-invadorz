@@ -2,6 +2,9 @@ import Invader from 'invader'
 import Player from 'player'
 import Star from 'star'
 import Keyboarder from 'keyboarder'
+import withBasicGun from 'withBasicGun'
+import withFatGun from 'withFatGun'
+import withMultiGun from 'withMultiGun'
 import debounce from 'lodash/function/debounce'
 
 export default class Game {
@@ -23,6 +26,7 @@ export default class Game {
     this.size = { x: width, y: height }
     this.center = { x: width / 2, y: height / 2 }
     this.playerHeight = 75
+    this.ordnanceAdvancer = this.advanceOrdnance()
     this.score = 0
     this.reset()
     this.mute = debounce(this.muteCore, 500, true)
@@ -51,6 +55,14 @@ export default class Game {
 
     tick()
 
+  }
+
+  *advanceOrdnance() {
+    while (true) {
+      yield withBasicGun
+      yield withFatGun
+      yield withMultiGun
+    }
   }
 
   reset() {

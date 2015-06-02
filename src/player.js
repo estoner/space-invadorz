@@ -1,9 +1,6 @@
 import Keyboarder from 'keyboarder'
 import withCollisionDestroys from 'withCollisionDestroys'
 import withDrawImage from 'withDrawImage'
-import withBasicGun from 'withBasicGun'
-import withFatGun from 'withFatGun'
-import withMultiGun from 'withMultiGun'
 import throttle from 'lodash/function/throttle'
 import extend from 'lodash/object/extend'
 
@@ -18,9 +15,7 @@ export default class Player {
     this.image.src = "images/smallfighter0005x2.png"
     extend(this, withDrawImage)
     extend(this, withCollisionDestroys)
-    extend(this, withBasicGun)
-    //extend(this, withFatGun)
-    extend(this, withMultiGun)
+    extend(this, this.game.ordnanceAdvancer.next().value)
     this.shoot = throttle(this.shoot, 200, {trailing: false} )
   }
 
