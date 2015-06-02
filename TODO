@@ -2,6 +2,8 @@ further ES6 cleanup and updates
   try bundle
 
 weapon types
+new weapons for player after each level
+throttle different weapons differently
 detect touchscreen
 touchscreen controls for iOS
   use Hammer.js
@@ -10,7 +12,6 @@ vertical bounding box is weirdly sloppy, too tall
   try sat.js?
 increase invader speed over time
 invaders should patrol all the way across if they have space
-new weapons for player after each level
 new weapon message
 help key for controls
 pan audio based on player position

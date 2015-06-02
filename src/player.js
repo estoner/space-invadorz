@@ -3,6 +3,7 @@ import withCollisionDestroys from 'withCollisionDestroys'
 import withDrawImage from 'withDrawImage'
 import withBasicGun from 'withBasicGun'
 import withFatGun from 'withFatGun'
+import withMultiGun from 'withMultiGun'
 import throttle from 'lodash/function/throttle'
 import extend from 'lodash/object/extend'
 
@@ -19,6 +20,7 @@ export default class Player {
     extend(this, withCollisionDestroys)
     extend(this, withBasicGun)
     //extend(this, withFatGun)
+    extend(this, withMultiGun)
     this.shoot = throttle(this.shoot, 200, {trailing: false} )
   }
 
