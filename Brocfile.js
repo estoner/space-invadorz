@@ -67,6 +67,8 @@ const lodash = funnel('./node_modules/lodash-es', {
          ]
 });
 
+const vendorJs = funnel('vendor');
+
 const lintedJs = eslint(src, {});
 
 const js = esTranspiler(lintedJs, {
@@ -115,5 +117,6 @@ module.exports = mergeTrees([
   imageDir,
   requirejs,
   babelPolyfill,
+  vendorJs,
   tpLodash
 ], {overwrite:true});
