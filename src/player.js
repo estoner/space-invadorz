@@ -16,7 +16,6 @@ export default class Player {
     extend(this, withDrawImage)
     extend(this, withCollisionDestroys)
     extend(this, this.game.ordnanceAdvancer.next().value)
-    this.shoot = throttle(this.shoot, 200, {trailing: false} )
   }
 
   update() {

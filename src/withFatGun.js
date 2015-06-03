@@ -1,4 +1,6 @@
 import Bullet from 'bullet'
+import throttle from 'lodash/function/throttle'
+
 let weapon = {
   shoot(direction = 1) {
     let bullet = new Bullet(
@@ -13,4 +15,5 @@ let weapon = {
     this.game.shootSound(this.game.audioContext, 0.3, this.game.gainNode)
   }
 }
+weapon.shoot = throttle(weapon.shoot, 300, {trailing: false} )
 export default weapon
