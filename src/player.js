@@ -1,7 +1,6 @@
 import Keyboarder from 'keyboarder'
 import withCollisionDestroys from 'withCollisionDestroys'
 import withDrawImage from 'withDrawImage'
-import throttle from 'lodash/function/throttle'
 import extend from 'lodash/object/extend'
 
 export default class Player {

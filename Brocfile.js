@@ -75,6 +75,7 @@ const js = esTranspiler(lintedJs, {
   stage: 0,
   moduleIds: true,
   modules: 'amd',
+  sourceMaps: 'inline',
 
   // Transforms /index.js files to use their containing directory name
   //getModuleId: function (name) {
