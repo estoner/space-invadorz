@@ -8,6 +8,7 @@ import withFatGun from 'withFatGun'
 import withMultiGun from 'withMultiGun'
 import withSpreadGun from 'withSpreadGun'
 import withShieldGun from 'withShieldGun'
+import withLaserGun from 'withLaserGun'
 import debounce from 'lodash/function/debounce'
 
 export default class Game {
@@ -63,6 +64,7 @@ export default class Game {
   *advanceOrdnance() {
     let i = 0
     while (i < 1000000) {
+      yield withLaserGun
       yield withBasicGun
       yield withFatGun
       yield withMultiGun
