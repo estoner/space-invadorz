@@ -7,6 +7,7 @@ import withRemoteControlGun from 'withRemoteControlGun'
 import withFatGun from 'withFatGun'
 import withMultiGun from 'withMultiGun'
 import withSpreadGun from 'withSpreadGun'
+import withShieldGun from 'withShieldGun'
 import debounce from 'lodash/function/debounce'
 
 export default class Game {
@@ -67,6 +68,7 @@ export default class Game {
       yield withMultiGun
       yield withRemoteControlGun
       yield withSpreadGun
+      yield withShieldGun
       i++
     }
   }

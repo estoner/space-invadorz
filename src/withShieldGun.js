@@ -3,9 +3,9 @@ let weapon = {
   shoot(direction = 1) {
     let bullet = new Bullet(
       this.game,
-      { x: this.center.x, y: this.center.y - 20 },
-      { x: 0, y: -2 * direction },
-      { x: 6, y: 6 }
+      { x: this.center.x, y: this.center.y - 40 },
+      { x: 0, y: -1 * direction },
+      { x: 36, y: 2 }
     )
     // this is a side effect
     this.game.addBody(bullet)

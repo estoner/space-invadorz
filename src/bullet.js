@@ -3,10 +3,10 @@ import withCollisionDestroys from 'withCollisionDestroys'
 import extend from 'lodash/object/extend'
 
 export default class Bullet {
-  constructor(game, center, velocity, size = 3) {
+  constructor(game, center, velocity, size = {x: 3, y: 3} ) {
     this.game = game
     this.center = center
-    this.size = { x: size, y: size }
+    this.size = size
     this.velocity = velocity
     this.color = "yellow"
     extend(this, withDrawRect)

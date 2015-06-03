@@ -5,7 +5,7 @@ let weapon = {
       this.game,
       { x: this.center.x, y: this.center.y - 20 },
       { x: 0, y: -7 * direction },
-      3,
+      { x: 2, y: 2 },
       this
     )
     // this is a side effect

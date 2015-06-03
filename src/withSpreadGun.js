@@ -7,7 +7,7 @@ let weapon = {
         this.game,
         { x: (this.center.x + j * 2), y: (this.center.y - 20) },
         { x: j, y: -5 * direction },
-        2
+        { x: 2, y: 2 }
       )
       this.game.addBody(bullet)
     }
