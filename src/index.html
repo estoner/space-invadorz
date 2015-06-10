@@ -3,10 +3,20 @@
         <title>Test Page</title>
         <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <script src="browser-polyfill.min.js"></script>
-        <script src="modernizr.js"></script>
         <script data-main="game" src="require.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     </head>
-    <body style="background-color: black; color: white;">
+    <body>
+      <style>
+        html, body {
+          background-color: black;
+          color: white;
+          overflow: hidden;
+          height: 100%;
+          width: 100%;
+          position: fixed;
+        }
+      </style>
       <!--<h1 style="font-family: 'Montserrat';">Space Invadorz</h1>-->
       <canvas id="screen">
         Your browser is too old to display it, but imagine a cheap
@@ -21,5 +31,6 @@
           <li>MUTE: m</li>
           <li>PAUSE: p</li>
         </ul>
+        OR on a touchscreen, just drag with your finger.
     </body>
 </html>

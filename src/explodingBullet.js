@@ -1,4 +1,3 @@
-import Keyboarder from 'keyboarder'
 import Bullet from 'bullet'
 import withDrawRect from 'withDrawRect'
 import withCollisionDestroys from 'withCollisionDestroys'
@@ -17,7 +16,6 @@ export default class ExplodingBullet {
   }
 
   update() {
-    //this.center.x = this.player.center.x
     this.center.y += this.velocity.y
 
     let screenRect = {
@@ -25,7 +23,6 @@ export default class ExplodingBullet {
       size: this.game.size
     }
 
-    // why is this here?
     if (!this.game.isColliding(this, screenRect)) {
       this.game.removeBody(this)
     }

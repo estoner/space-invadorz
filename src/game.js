@@ -37,6 +37,7 @@ export default class Game {
     this.mute = debounce(this.muteCore, 500, true)
     this.pause = debounce(this.pauseCore, 500, true)
 
+
     // frickin' Safari
     if ('webkitAudioContext' in window) {
       this.audioContext = new window.webkitAudioContext()
@@ -48,6 +49,8 @@ export default class Game {
     this.muted = true
 
     this.paused = false
+
+
 
     let tick = () => {
       if (!this.paused) {
@@ -83,6 +86,7 @@ export default class Game {
 
     this.numStars = 50
     this.stars = Star.createStars(this, this.numStars)
+
   }
 
   update() {
@@ -109,6 +113,7 @@ export default class Game {
     }
 
     if (typeof this.victory === "boolean") {
+      this.reset()
       if (this.keyboarder.isDown(this.keyboarder.KEYS.R)) {
         this.reset()
       }

@@ -1,23 +1,23 @@
 further ES6 cleanup and updates
   try bundle
 
-flying saucers that fire directly at you
-new weapon message
-weapon status line
-help key for controls
-select from unlocked weapons
 detect touchscreen
 touchscreen controls for iOS
   use Hammer.js
   drag player back and forth and autoshoot
 vertical bounding box is weirdly sloppy, too tall
   try sat.js?
+put civilians on the planet that can be killed by invader shots
+scroll civilians horizontally like the planet is rotating
+flying saucers that fire directly at you
+new weapon message
+weapon status line
+help key for controls
+select from unlocked weapons
 increase invader speed over time
 invaders should patrol all the way across if they have space
 pan audio based on player position
 put high scores in localStorage
-put civilians on the planet that can be killed by invader shots
-scroll civilians horizontally like the planet is rotating
 death sound FX
 death explosion animations
 try jspm.io, see http://developer.telerik.com/featured/choose-es6-modules-today
