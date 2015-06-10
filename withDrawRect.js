@@ -1,0 +1,12 @@
+define("withDrawRect", ["exports", "module"], function (exports, module) {
+  "use strict";
+
+  var withDrawRect = {
+    draw: function draw(screen) {
+      screen.fillStyle = this.color;
+      screen.fillRect(this.center.x - this.size.x / 2, this.center.y - this.size.y / 2, this.size.x, this.size.y);
+    }
+  };
+  module.exports = withDrawRect;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndpdGhEcmF3UmVjdC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxNQUFJLFlBQVksR0FBRztBQUNqQixRQUFJLEVBQUUsY0FBUyxNQUFNLEVBQUU7QUFDckIsWUFBTSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFBO0FBQzdCLFlBQU0sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLEdBQUcsQ0FBQyxFQUNoQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxDQUFDLEVBQy9CLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxFQUNYLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUE7S0FDNUI7R0FDRixDQUFBO21CQUNjLFlBQVkiLCJmaWxlIjoid2l0aERyYXdSZWN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsidmFyIHdpdGhEcmF3UmVjdCA9IHtcbiAgZHJhdzogZnVuY3Rpb24oc2NyZWVuKSB7XG4gICAgc2NyZWVuLmZpbGxTdHlsZSA9IHRoaXMuY29sb3JcbiAgICBzY3JlZW4uZmlsbFJlY3QodGhpcy5jZW50ZXIueCAtIHRoaXMuc2l6ZS54IC8gMixcbiAgICAgICAgICAgICAgICAgICB0aGlzLmNlbnRlci55IC0gdGhpcy5zaXplLnkgLyAyLFxuICAgICAgICAgICAgICAgICAgIHRoaXMuc2l6ZS54LFxuICAgICAgICAgICAgICAgICAgIHRoaXMuc2l6ZS55KVxuICB9XG59XG5leHBvcnQgZGVmYXVsdCB3aXRoRHJhd1JlY3RcbiJdfQ==

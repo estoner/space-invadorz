@@ -1,48 +1,36 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <script src="game.js"></script>
-
-    <title>Space Invadorz</title>
-  </head>
-
-  <body>
-
-    <header>
-      <div class="container">
-        <h1>Space Invadorz</h1>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-<canvas id="screen" width="550" height="550">
-  Your browser is too old to display it, but imagine a cheap
-  Space Invaders knockoff in this space. Make "pew pew" sounds
-  to yourself to complete the effect.
-</canvas>
-
-<p>A simple little game that I'm gradually complicating, and using as excuse
-to learn web APIs I've never had a reason to try. Adapted from
-<a href="http://github.com/maryrosecook">Mary Rose Cook</a>'s code from her
-<a href="https://vimeo.com/105955605">excellent, excellent live-coding demo</a>.</p>
-      </section>
-    </div>
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-322607-3', 'auto');
-      ga('send', 'pageview');
-
-    </script>
-  </body>
+    <head>
+        <title>Test Page</title>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <script src="browser-polyfill.min.js"></script>
+        <script data-main="game" src="require.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    </head>
+    <body>
+      <style>
+        html, body {
+          background-color: black;
+          color: white;
+          overflow: hidden;
+          height: 100%;
+          width: 100%;
+          position: fixed;
+        }
+      </style>
+      <!--<h1 style="font-family: 'Montserrat';">Space Invadorz</h1>-->
+      <canvas id="screen">
+        Your browser is too old to display it, but imagine a cheap
+        Space Invaders knockoff in this space. Make "pew pew" sounds
+        to yourself to complete the effect.
+      </canvas>
+      <div>
+        <h2>Controls:</h2>
+        <ul>
+          <li>MOVE:  arrow keys</li>
+          <li>FIRE:  space bar</li>
+          <li>MUTE: m</li>
+          <li>PAUSE: p</li>
+        </ul>
+        OR on a touchscreen, just drag with your finger.
+    </body>
 </html>
