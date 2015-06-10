@@ -1,10 +1,7 @@
 further ES6 cleanup and updates
   try bundle
 
-detect touchscreen
-touchscreen controls for iOS
-  use Hammer.js
-  drag player back and forth and autoshoot
+ipad icon and startup images
 vertical bounding box is weirdly sloppy, too tall
   try sat.js?
 put civilians on the planet that can be killed by invader shots
