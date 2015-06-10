@@ -1,6 +1,7 @@
 further ES6 cleanup and updates
   try bundle
 
+fix ios webapp scroll
 ipad icon and startup images
 vertical bounding box is weirdly sloppy, too tall
   try sat.js?
