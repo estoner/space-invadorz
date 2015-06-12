@@ -15,5 +15,5 @@ let weapon = {
     this.game.shootSound(this.game.audioContext, 0.3, this.game.gainNode)
   }
 }
-weapon.shoot = throttle(weapon.shoot, 400, {trailing: false} )
+weapon.shoot = throttle(weapon.shoot, 150, {trailing: false} )
 export default weapon
