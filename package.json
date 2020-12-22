@@ -6,8 +6,7 @@
   "scripts": {
     "start": "broccoli serve --host 192.168.10.108 --port 4200",
     "build": "rm -rf dist && broccoli build dist",
-    "preinstall": "npm install -g broccoli-cli",
-    "test": "mocha"
+    "preinstall": "npm install -g broccoli-cli"
   },
   "repository": {
     "type": "git",
@@ -30,8 +29,6 @@
     "es6-module-loader": "^0.16.6",
     "glob": "^5.0.3",
     "lodash-es": "^4.17.14",
-    "mocha": "^2.2.4",
-    "mocha-jshint": "^1.0.0",
     "requirejs": "^2.1.17",
     "systemjs": "^0.16.11"
   },
