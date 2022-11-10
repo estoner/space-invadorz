@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/estoner/space-invadorz",
   "devDependencies": {
-    "babel": "^5.0.0",
-    "broccoli": "^0.16.2",
-    "broccoli-babel-transpiler": "^5.0.0",
-    "broccoli-concat": "^0.0.13",
-    "broccoli-funnel": "^0.2.3",
+    "babel": "^6.23.0",
+    "broccoli": "^3.5.2",
+    "broccoli-babel-transpiler": "^7.8.1",
+    "broccoli-concat": "^4.2.5",
+    "broccoli-funnel": "^3.0.8",
     "broccoli-merge-trees": "^0.2.1",
     "chai": "^2.2.0",
     "es6-module-loader": "^0.16.6",
@@ -33,6 +33,6 @@
     "systemjs": "^0.16.11"
   },
   "dependencies": {
-    "broccoli-lint-eslint": "^0.1.5"
+    "broccoli-lint-eslint": "^6.0.0"
   }
 }
